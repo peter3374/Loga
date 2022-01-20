@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:loda/Themes/theme_constants.dart';
 
-Box hiveStorage = Hive.box('user_data');
+Box _hiveStorage = Hive.box('user_data');
 
 class ThemeManager with ChangeNotifier {
   // default is dark mode
@@ -27,7 +27,7 @@ class ThemeManager with ChangeNotifier {
 
 class ThemeHelper {
   static ThemeData getCurrentTheme() {
-    String currentTheme = hiveStorage.get('currentTheme') ?? 'darkMode';
+    String currentTheme = _hiveStorage.get('currentTheme') ?? 'darkMode';
     switch (currentTheme) {
       case 'darkGreenMode':
         print(currentTheme);
@@ -51,7 +51,7 @@ class ThemeHelper {
   }
 
   static Color getSheetColor() {
-    String currentTheme = hiveStorage.get('currentTheme') ?? 'null';
+    String currentTheme = _hiveStorage.get('currentTheme') ?? 'null';
     switch (currentTheme) {
       case 'darkGreenMode':
         print(currentTheme);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class UserTasks extends StatelessWidget {
+class UserMessage extends StatelessWidget {
   double fontSize = 12;
   final String date, userName, text;
 
-   UserTasks(
+  UserMessage(
       {Key? key,
       required this.fontSize,
       required this.date,
@@ -36,7 +36,7 @@ class UserTasks extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
-                'C:/$userName>',
+                'C:/Users/$userName>',
                 softWrap: true,
                 maxLines: 3,
                 style: TextStyle(

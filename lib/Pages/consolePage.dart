@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:loda/Pages/changeFont.dart';
 import 'package:loda/Pages/pickTheme.dart';
+import 'package:loda/Pages/removeData.dart';
 import 'package:loda/Themes/theme_manager.dart';
 import 'package:loda/Widgets/Console/consoleButton.dart';
 import 'package:loda/Widgets/Console/userTasksWidget.dart';
@@ -17,10 +18,16 @@ class ConsolePage extends StatefulWidget {
 }
 
 class _ConsolePageState extends State<ConsolePage> {
+  bool _isCheckedRmReports = false, _isCheckedRmAll = false;
+
+  TextEditingController _textEditingController = TextEditingController();
+
+  ScrollController _scrollConsoleController =
+      ScrollController(initialScrollOffset: 0);
   @override
   void initState() {
     super.initState();
-    _scrollToLast();
+    _scrollConsoleToLast();
   }
 
   @override
@@ -28,22 +35,23 @@ class _ConsolePageState extends State<ConsolePage> {
     super.dispose();
   }
 
-  Future _scrollToLast() async {
-    await Future.delayed(Duration(seconds: 1));
-    try {
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-    } catch (e) {
-      print('no data scroll exception');
+  Future _scrollConsoleToLast() async {
+//FIXED   ScrollController not attached to any scroll views.
+    if (_scrollConsoleController.hasClients) {
+      if (Hive.box<TodoModel>('user_reports').values.isEmpty) {
+        print('dont scrooll');
+      } else if (Hive.box<TodoModel>('user_reports').values.isNotEmpty) {
+        _scrollConsoleController
+            .jumpTo(_scrollConsoleController.position.maxScrollExtent);
+        print('can scroll');
+      }
     }
   }
 
-  TextEditingController _textEditingController = TextEditingController();
-  ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
-
-  saveData() async {
+  _saveData() async {
     if (_textEditingController.text.length >= 2) {
-      Box<TodoModel> todoBox = Hive.box<TodoModel>('user_reports');
-      await todoBox.add(TodoModel(
+     
+      await Hive.box<TodoModel>('user_reports').add(TodoModel(
           date: DateFormat('yMd').format(DateTime.now()).toString(),
           text: _textEditingController.text));
       print('saved!');
@@ -70,14 +78,14 @@ class _ConsolePageState extends State<ConsolePage> {
                   if (box.values.isEmpty) {
                     return Center(
                         child: Text(
-                      'Dear, ${userDataBox.get('nickname')} \nyou dont have any data \😔',
+                      'Empty list \😔',
                       style: TextStyle(
                         fontSize: 22,
                       ),
                     ));
                   } else {
                     return ListView.builder(
-                        controller: _scrollController,
+                        controller: _scrollConsoleController,
                         itemCount: box.length,
                         shrinkWrap: true,
                         itemBuilder: (
@@ -85,7 +93,7 @@ class _ConsolePageState extends State<ConsolePage> {
                           index,
                         ) {
                           TodoModel? todo = box.getAt(index);
-                          return UserTasks(
+                          return UserMessage(
                             fontSize: userDataBox.get('currentFontSize'),
                             date: todo!.date.toString(),
                             text: todo.text ?? "null",
@@ -166,7 +174,7 @@ class _ConsolePageState extends State<ConsolePage> {
                             Material(
                               color: Colors.transparent,
                               child: InkWell(
-                                onTap: () => saveData(),
+                                onTap: () => _saveData(),
                                 splashColor: Theme.of(context).buttonColor,
                                 child: Icon(
                                   Icons.send,
@@ -187,16 +195,17 @@ class _ConsolePageState extends State<ConsolePage> {
                             spacing: 0,
                             alignment: WrapAlignment.center,
                             children: [
-                              ConsoleButton(
-                                leadingIcon: Icons.supervised_user_circle,
-                                title: 'User',
-                                onclick: () => null,
-                              ),
+                              // ConsoleButton(
+                              //   leadingIcon: Icons.supervised_user_circle,
+                              //   title: 'User',
+                              //   onclick: () => null,
+                              // ),
                               ConsoleButton(
                                 leadingIcon: Icons.grid_4x4_outlined,
                                 title: 'GridView',
                                 onclick: () => null,
                               ),
+
                               ConsoleButton(
                                 leadingIcon: Icons.style,
                                 title: 'Themes',
@@ -217,19 +226,24 @@ class _ConsolePageState extends State<ConsolePage> {
                               //   title: 'Stats',
                               //   onclick: () => null,
                               // ),
-                              ConsoleButton(
-                                leadingIcon: Icons.star,
-                                title: 'Rate app!',
-                                onclick: () => null,
-                              ),
+                              // ConsoleButton(
+                              //   leadingIcon: Icons.star,
+                              //   title: 'Rate app!',
+                              //   onclick: () => null,
+                              // ),
                               ConsoleButton(
                                   leadingIcon: Icons.remove_circle,
                                   title: 'Erase data',
                                   onclick: () async {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RemoveData()));
+                                    // _showDialog();
                                     //  Hive.deleteFromDisk();
-                                    await Hive.deleteBoxFromDisk(
-                                        'user_reports');
-                                        /* add dialog for chose
+                                    // await Hive.deleteBoxFromDisk(
+                                    //     'user_reports');
+                                    /* add dialog for chose
                                         1) remove only tasks
                                         2) remove all data (required password)
                                         */

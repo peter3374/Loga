@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeVariables {
+abstract class ThemeVariables {
   static const List<Color> shimmerBase = [
     Colors.green,
     Colors.red,

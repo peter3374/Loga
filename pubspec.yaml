@@ -24,7 +24,7 @@ dependencies:
   path_provider:
   provider:
   parallax_rain:
-  shimmer: ^2.0.0
+  shimmer: ^2.0.0 # for text animation
   random_string: 
 
 
@@ -50,6 +50,7 @@ flutter:
   assets:
     - assets/logo.png
     - assets/themeExample/
+    - assets/gifChose/meme.gif
   #   - images/a_dot_ham.jpeg
 
 

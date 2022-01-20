@@ -7,7 +7,7 @@ import 'package:loda/Themes/theme_manager.dart';
 
 import 'package:loda/Widgets/ChoseTheme/themeCard.dart';
 
-import 'package:loda/model/getVisits.dart';
+
 import 'package:provider/src/provider.dart';
 
 class SwitchThemePage extends StatefulWidget {

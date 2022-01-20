@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:loda/Widgets/Register/textField.dart';
 import 'package:loda/main.dart';
-import 'package:loda/model/auth.dart';
+import 'package:loda/model/Pages/Register/auth.dart';
 import 'package:loda/model/database/todomodel.dart';
 import 'package:parallax_rain/parallax_rain.dart';
 import 'package:random_string/random_string.dart';
@@ -82,13 +82,13 @@ class _RegisterState extends State<Register> {
                 children: [
                   logo(),
                   CustomTextField(
-                    method: null,
+                    method: () => print('soon'),
                     hintText: 'Nickname:',
                     textEditingController: _nicknameController,
                     maxLength: 20,
                   ),
                   CustomTextField(
-                    method: null,
+                    method: () => print('soon'),
                     hintText: 'Password:',
                     textEditingController: _passwordController,
                     maxLength: 20,
@@ -113,8 +113,8 @@ class _RegisterState extends State<Register> {
                           setState(() {
                             _nicknameStatus = value;
                             if (_nicknameStatus) {
-                              _nicknameController.text = Auth.nickNames[
-                                  Random().nextInt(Auth.nickNames.length)];
+                              _nicknameController.text = GeneratedNicknames.nickNames[
+                                  Random().nextInt(GeneratedNicknames.nickNames.length)];
                             } else {
                               _nicknameController.text = '';
                             }
@@ -139,8 +139,7 @@ class _RegisterState extends State<Register> {
                           setState(() {
                             _passwordStatus = value;
                             if (_passwordStatus) {
-                              _passwordController.text =
-                                  randomString(8);
+                              _passwordController.text = randomString(8);
                             } else {
                               _passwordController.text = '';
                             }
@@ -151,6 +150,7 @@ class _RegisterState extends State<Register> {
                       ),
                     ],
                   ),
+                  // enter
                   TextButton(
                     onPressed: () {
                       setState(() {

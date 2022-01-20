@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loda/Pages/consolePage.dart';
+import 'package:loda/Pages/removeData.dart';
 import 'package:loda/Themes/theme_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:loda/Pages/register.dart';
+import 'package:loda/model/Pages/Register/getVisits.dart';
 import 'package:loda/model/database/todomodel.dart';
-import 'package:loda/model/getVisits.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +36,9 @@ class MaterialAppTheme extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Loga',
         theme: Provider.of<ThemeManager>(context).getThemeData,
-        home: FutureBuilder(
+        home:
+            //RemoveData()
+            FutureBuilder(
           future: UserData.getUserVisits(),
           builder: (context, snapshot) {
             if (snapshot.data == true) {

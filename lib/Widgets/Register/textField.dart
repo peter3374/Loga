@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final int maxLength;
-  VoidCallback? method;
+  final VoidCallback method;
   TextEditingController textEditingController;
   CustomTextField(
       {Key? key,
