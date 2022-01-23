@@ -7,7 +7,6 @@ import 'package:loda/Themes/theme_manager.dart';
 
 import 'package:loda/Widgets/ChoseTheme/themeCard.dart';
 
-
 import 'package:provider/src/provider.dart';
 
 class SwitchThemePage extends StatefulWidget {
@@ -15,6 +14,7 @@ class SwitchThemePage extends StatefulWidget {
   _SwitchThemePageState createState() => _SwitchThemePageState();
 }
 
+// Save theme only if it paid; Toll themes can apply but save! Just for demo
 class _SwitchThemePageState extends State<SwitchThemePage> {
   static List<String> _buttonTitles = [
     '0.99 USD',
@@ -44,7 +44,7 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
                     bottomRight: Radius.circular(12))),
           ),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: ListView.builder(
             itemCount: _buttonTitles.length,
             itemBuilder: (context, index) {
@@ -52,8 +52,8 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
                 padding: const EdgeInsets.all(30.0),
                 child: MyThemeCard(
                   method: () {
-                    int selected = index;
-                    switch (selected) {
+                    // int selected = index;
+                    switch (index) {
                       case 0:
                         // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         //   content: Text(
@@ -80,13 +80,13 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
                         //   ),
                         //   backgroundColor: Colors.black,
                         // ));
-                        print('green');
-                        // print('red');
+                        print('red');
                         context.read<ThemeManager>().setThemeData(darkRedMode);
                         // sheet
                         context.read<ThemeManager>().sheetColor =
                             Color(0xFF140202);
-
+                        // save
+                        // _hiveStorage.put('currentTheme', 'darkRedMode');
                         break;
                       case 2:
                         print('fruit');
@@ -94,10 +94,9 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
                             .read<ThemeManager>()
                             .setThemeData(darkOrangeMode);
                         // sheet
-
                         context.read<ThemeManager>().sheetColor =
                             Color(0xFF532809);
-// save
+                        // save
                         _hiveStorage.put('currentTheme', 'darkOrangeMode');
 
                         break;
@@ -115,7 +114,8 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
                             Color(0xFF33021D);
 
                         print('pink');
-
+                        //save theme
+                        //  _hiveStorage.put('currentTheme', 'darkPinkMode');
                         break;
                       case 4:
                         print('power light');
@@ -123,7 +123,7 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
                         // sheet
                         context.read<ThemeManager>().sheetColor =
                             Color(0xFF06BFBF);
-// trying save theme
+                        //save theme
                         _hiveStorage.put('currentTheme', 'lightMode');
                         break;
 

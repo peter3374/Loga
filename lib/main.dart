@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loda/Pages/consolePage.dart';
-import 'package:loda/Pages/removeData.dart';
+import 'package:loda/Pages/locale.dart';
+import 'package:loda/Pages/register.dart';
 import 'package:loda/Themes/theme_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:loda/Pages/register.dart';
-import 'package:loda/model/Pages/Register/getVisits.dart';
+import 'package:loda/model/Logic/Register/getVisits.dart';
 import 'package:loda/model/database/todomodel.dart';
-
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +15,8 @@ Future<void> main() async {
   final appDocDir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(appDocDir.path);
   Hive.registerAdapter(TodoModelAdapter());
-  await Hive.openBox('user_data');
-  await Hive.openBox<TodoModel>('user_reports');
+  await Hive.openBox('user_data'); // some data like themes, password
+  await Hive.openBox<TodoModel>('user_reports'); // only reports
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => ThemeManager())],
@@ -37,7 +36,8 @@ class MaterialAppTheme extends StatelessWidget {
         title: 'Loga',
         theme: Provider.of<ThemeManager>(context).getThemeData,
         home:
-            //RemoveData()
+        // LocalePage()
+
             FutureBuilder(
           future: UserData.getUserVisits(),
           builder: (context, snapshot) {
@@ -47,6 +47,7 @@ class MaterialAppTheme extends StatelessWidget {
               return ConsolePage();
             }
           },
-        ));
+        )
+        );
   }
 }

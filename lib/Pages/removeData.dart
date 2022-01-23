@@ -15,21 +15,22 @@ class RemoveData extends StatefulWidget {
 
 class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
   TextEditingController _passwordController = TextEditingController();
-
-  bool _isClicked1 = false; // border1
-  bool _isClicked2 = false; // border2
-  bool _applyValue = false; // checkBox
-  double _buttonOpacity = 0; 
+  bool _isClicked1 = false,
+      _isClicked2 = false,
+      _isVisiblePassword = false,
+      _applyValue = false;
+  double _buttonOpacity = 0;
   double _fieldLeft = 900; // pixels? Bad idea
-
+  var _hiveStorage = Hive.box<dynamic>('user_data');
+  String _errorHandler = '';
   @override
   void initState() {
     super.initState();
-    // print('${Hive.box('user_data').get('password')}');
+    print('${Hive.box('user_data').get('password')}');
   }
 
   Future<void> _switchApplyValue(bool value) async {
-    await Future.delayed(const Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 700));
     setState(() {
       _applyValue = value;
     });
@@ -53,13 +54,16 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                   setState(() {
                     _isClicked1 = !_isClicked1;
                     if (_isClicked1) {
+                      _isClicked2 = false;
                       _fieldLeft = 0;
                       _buttonOpacity = 1;
                     } else {
                       _fieldLeft = 900;
                       _buttonOpacity = 0;
-                      _passwordController.text = '';
+                      //  _passwordController.text = '';
                     }
+
+                    //    Hive.deleteFromDisk();
                   });
                 },
               ),
@@ -67,15 +71,17 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                 text: "Remove day reports.",
                 isClicked: _isClicked2,
                 method: () {
+                  //  Hive.deleteBoxFromDisk('user_reports');
                   setState(() {
                     _isClicked2 = !_isClicked2;
                     if (_isClicked2) {
+                      _isClicked1 = false;
                       _fieldLeft = 0;
                       _buttonOpacity = 1;
                     } else {
                       _fieldLeft = 900;
                       _buttonOpacity = 0;
-                      _passwordController.text = '';
+                      //   _passwordController.text = '';
                     }
                   });
                 },
@@ -89,33 +95,48 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInSine,
             padding: EdgeInsets.only(left: _fieldLeft),
-            child: LimitedBox(
-              maxWidth: 200,
-              child: TextField(
-                controller: _passwordController,
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                ),
-                onEditingComplete: () {},
-                onSubmitted: (value) {
-                  _passwordController.text = value;
-                  _buttonOpacity = 1;
-                },
-                cursorWidth: 8,
-                cursorColor: Theme.of(context).primaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.lock,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+              child: LimitedBox(
+                maxWidth: 200,
+                child: TextField(
+                  obscureText: _isVisiblePassword, // show/hide
+                  obscuringCharacter: '\$',
+                  controller: _passwordController,
+                  style: TextStyle(
                     color: Theme.of(context).primaryColor,
                   ),
-                  border: UnderlineInputBorder(),
-                  prefixIconColor: Theme.of(context).primaryColor,
-                  hintText: 'Password:',
-                  hintStyle: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                  onEditingComplete: () {},
+                  onSubmitted: (value) {
+                    _passwordController.text = value;
+                    // _buttonOpacity = 1;
+                  },
+                  //   onChanged: (value) =>    _passwordController.text = value,
+                  cursorWidth: 8,
+                  cursorColor: Theme.of(context).primaryColor,
+                  decoration: InputDecoration(
+                    icon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isVisiblePassword = !_isVisiblePassword;
+                        });
+                      },
+                      child: Icon(
+                        _isVisiblePassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    border: UnderlineInputBorder(),
+                    prefixIconColor: Theme.of(context).primaryColor,
+                    hintText: 'Password:',
+                    hintStyle: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    focusColor: Theme.of(context).primaryColor,
+                    hoverColor: Theme.of(context).primaryColor,
                   ),
-                  focusColor: Theme.of(context).primaryColor,
-                  hoverColor: Theme.of(context).primaryColor,
                 ),
               ),
             ),
@@ -136,24 +157,29 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                       Transform.scale(
                         scale: 1.2,
                         child: Checkbox(
-                          fillColor: MaterialStateProperty.all(Colors.white),
+                          checkColor: Colors.red,
+                          fillColor:
+                              MaterialStateProperty.all(Colors.transparent),
                           value: _applyValue,
                           onChanged: (bool? value) async {
-                            if (_isClicked1) {
-                              if (_passwordController.text.compareTo(
-                                      Hive.box('user_data').get('password')) ==
-                                  0) {
-                                _switchApplyValue(value!);
+                            if (_passwordController.text.compareTo(
+                                    Hive.box('user_data').get('password')) ==
+                                0) {
+                              if (_isClicked1) {
+                                _errorHandler = 'Removed!';
                                 //  Hive.deleteFromDisk();
-                                await Hive.deleteBoxFromDisk('user_reports')
-                                    .then((value) =>
-                                        print('removed restart the app!'));
-                                Navigator.pop(context);
-                              } else if (_passwordController.text == '') {
-                                print('Enter password');
-                              } else {
-                                print('Wrong');
                               }
+                              if (_isClicked2) {
+                                // await Hive.deleteBoxFromDisk('user_reports')
+                                //     .then((value) =>
+                                _errorHandler = 'Removed, pls restart the app!';
+                              }
+                              _switchApplyValue(value!);
+                              // Navigator.pop(context);
+                            } else if (_passwordController.text == '') {
+                              _errorHandler = 'Enter password';
+                            } else {
+                              _errorHandler = 'Wrong password';
                             }
                           },
                           shape: RoundedRectangleBorder(
@@ -162,15 +188,24 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                       ),
                       Text(
                         _applyValue ? 'Removed' : 'Remove',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color:
+                                Theme.of(context).textTheme.headline6!.color),
                       )
                     ],
                   ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(width: 2, color: Colors.white)),
+                      border: Border.all(
+                          width: 2, color: Theme.of(context).primaryColor)),
                 ),
               ),
+            ),
+          ),
+          Center(
+            child: Text(
+              _errorHandler,
+              style: TextStyle(color: Colors.red),
             ),
           ),
           Padding(
@@ -188,18 +223,21 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                     children: [
                       Icon(
                         Icons.arrow_back_ios_new,
-                        color: Colors.white,
+                        color: Theme.of(context).primaryColor,
                         size: 30,
                       ),
                       Text(
                         'Back',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color:
+                                Theme.of(context).textTheme.headline6!.color),
                       )
                     ],
                   ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(width: 2, color: Colors.white)),
+                      border: Border.all(
+                          width: 2, color: Theme.of(context).primaryColor)),
                 ),
               ),
             ),

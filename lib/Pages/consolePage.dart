@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:loda/Pages/changeFont.dart';
+import 'package:loda/Pages/locale.dart';
 import 'package:loda/Pages/pickTheme.dart';
 import 'package:loda/Pages/removeData.dart';
 import 'package:loda/Themes/theme_manager.dart';
@@ -50,7 +51,6 @@ class _ConsolePageState extends State<ConsolePage> {
 
   _saveData() async {
     if (_textEditingController.text.length >= 2) {
-     
       await Hive.box<TodoModel>('user_reports').add(TodoModel(
           date: DateFormat('yMd').format(DateTime.now()).toString(),
           text: _textEditingController.text));
@@ -226,32 +226,26 @@ class _ConsolePageState extends State<ConsolePage> {
                               //   title: 'Stats',
                               //   onclick: () => null,
                               // ),
-                              // ConsoleButton(
-                              //   leadingIcon: Icons.star,
-                              //   title: 'Rate app!',
-                              //   onclick: () => null,
-                              // ),
+                              ConsoleButton(
+                                leadingIcon: Icons.star,
+                                title: 'Rate app!',
+                                onclick: () => null,
+                              ),
                               ConsoleButton(
                                   leadingIcon: Icons.remove_circle,
                                   title: 'Erase data',
-                                  onclick: () async {
+                                  onclick: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 RemoveData()));
-                                    // _showDialog();
-                                    //  Hive.deleteFromDisk();
-                                    // await Hive.deleteBoxFromDisk(
-                                    //     'user_reports');
-                                    /* add dialog for chose
-                                        1) remove only tasks
-                                        2) remove all data (required password)
-                                        */
                                   }),
                               ConsoleButton(
                                 leadingIcon: Icons.language_outlined,
                                 title: 'Locale',
-                                onclick: () => null,
+                                onclick: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => LocalePage())),
                               ),
                               ConsoleButton(
                                 leadingIcon: Icons.power_settings_new,

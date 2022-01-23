@@ -51,6 +51,7 @@ flutter:
     - assets/logo.png
     - assets/themeExample/
     - assets/gifChose/meme.gif
+    - assets/flags/
   #   - images/a_dot_ham.jpeg
 
 

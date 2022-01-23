@@ -2,14 +2,11 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:loda/Pages/consolePage.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:loda/Widgets/Register/textField.dart';
-import 'package:loda/main.dart';
-import 'package:loda/model/Pages/Register/auth.dart';
-import 'package:loda/model/database/todomodel.dart';
+import 'package:loda/model/Logic/Register/nicknames.dart';
 import 'package:parallax_rain/parallax_rain.dart';
 import 'package:random_string/random_string.dart';
 
@@ -30,10 +27,10 @@ class _RegisterState extends State<Register> {
   bool _nicknameStatus = false;
   bool _passwordStatus = false;
 
-  String verification() {
+  String _verification() {
     if (_formKey.currentState!.validate()) {
-      if (_nicknameController.text.length > 3 &&
-          _passwordController.text.length >= 8) {
+      if (_nicknameController.text.length >= 2 &&
+          _passwordController.text.length >= 7) {
         Box username_box = Hive.box('user_data');
         username_box.put('nickname', _nicknameController.text);
         username_box.put('password', _passwordController.text);
@@ -52,7 +49,6 @@ class _RegisterState extends State<Register> {
         return 'Password cant be empty.';
       } else if (_nicknameController.text.length <= 2) {
         return 'Too short nickname. Nickname must be >2 symbols.';
-        print(_errorhandler);
       } else if (_passwordController.text.length <= 8) {
         return 'Too short password. Password must be >10 symbols.';
       }
@@ -80,7 +76,7 @@ class _RegisterState extends State<Register> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  logo(),
+                  _logo(),
                   CustomTextField(
                     method: () => print('soon'),
                     hintText: 'Nickname:',
@@ -113,8 +109,9 @@ class _RegisterState extends State<Register> {
                           setState(() {
                             _nicknameStatus = value;
                             if (_nicknameStatus) {
-                              _nicknameController.text = GeneratedNicknames.nickNames[
-                                  Random().nextInt(GeneratedNicknames.nickNames.length)];
+                              _nicknameController.text =
+                                  GeneratedNicknames.nickNames[Random().nextInt(
+                                      GeneratedNicknames.nickNames.length)];
                             } else {
                               _nicknameController.text = '';
                             }
@@ -154,7 +151,7 @@ class _RegisterState extends State<Register> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        _errorhandler = verification();
+                        _errorhandler = _verification();
                       });
                     },
                     child: const Text(
@@ -174,7 +171,7 @@ class _RegisterState extends State<Register> {
   }
 }
 
-Widget logo() {
+Widget _logo() {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 50),
     child: Column(

@@ -15,7 +15,6 @@ class ChangeFont extends StatefulWidget {
 class _ChangeFontState extends State<ChangeFont> {
   double _fontFize = 12;
   var userNameBox = Hive.box('user_data');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +30,7 @@ class _ChangeFontState extends State<ChangeFont> {
                       child: Text(
                     'Default text',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: _fontFize,
                     ),
                   ));
                 } else {
@@ -123,7 +122,7 @@ class _ChangeFontState extends State<ChangeFont> {
             CustomFontNavigationButton(
               icon: Icons.done,
               method: () {
-                userNameBox.put('currentFontSize', _fontFize);
+                Hive.box('user_data').put('currentFontSize', _fontFize);
               },
             ),
           ],

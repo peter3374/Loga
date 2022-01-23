@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RemoveCard extends StatelessWidget {
-  final VoidCallback method;
+  final VoidCallback? method;
   final String text;
   bool isClicked = false;
   RemoveCard(
@@ -25,8 +25,8 @@ class RemoveCard extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                fontSize: 22,
-              ),
+                  fontSize: 22,
+                  color: Theme.of(context).textTheme.headline6!.color),
             ),
           ),
           // Image.asset(
@@ -35,7 +35,9 @@ class RemoveCard extends StatelessWidget {
           // ),
           decoration: BoxDecoration(
               border: Border.all(
-                  color: isClicked ? Colors.red : Colors.white, width: 4),
+                  color:
+                      isClicked ? Colors.red : Theme.of(context).primaryColor,
+                  width: 4),
               borderRadius: BorderRadius.circular(19),
               color: Colors.black12),
         ),
