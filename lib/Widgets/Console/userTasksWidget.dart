@@ -36,9 +36,9 @@ class UserMessage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
-                'C:/Users/$userName>',
+                '$userName>',
                 softWrap: true,
-                maxLines: 3,
+                //   maxLines: 3,
                 style: TextStyle(
                     color: Theme.of(context).textTheme.headline6!.color,
                     fontSize: fontSize),
@@ -86,6 +86,7 @@ class UserTasksFont extends StatelessWidget {
             child: Text(
               date,
               style: TextStyle(
+                
                   color: Theme.of(context).textTheme.headline6!.color),
             ),
           ),

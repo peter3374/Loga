@@ -24,10 +24,14 @@ class PickLocaleButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset(
-                'assets/flags/$countryCode.png',
-                width: 40,
-                height: 40,
+              LimitedBox(
+                maxHeight: 50,
+                maxWidth: 100,
+                child: Image.asset(
+                  'assets/flags/$countryCode.png',
+                  width: 40,
+                  height: 40,
+                ),
               ),
               // Icon(
               //   leadingIcon,

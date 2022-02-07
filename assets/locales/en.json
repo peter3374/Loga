@@ -1,0 +1,37 @@
+{
+    "Nickname" : "Nickname:",
+    "Password" : "Password:",
+    "GenerateNickname" : "Generate nickname",
+    "GeneratePassword" : "Generate password",
+    "Enter" : "Enter",
+
+    "EmptyList" : "Empty list",
+    "Today" : "Today:",
+    "DayExperience" : "Enter your day experience:",
+
+    "GridView" : "Grid View",
+    "Themes" : "Themes",
+    "FontSize" : "Font Size",
+    "RateApp" : "Rate app!",
+    "EraseData" : "Erase data",
+    "Lang" : "Lang",
+    "Exit" : "Exit",
+
+
+    "Color" : "Color",
+    "Background" : "Background",
+    "BottomSheet" : "Bottom sheet",
+    "Apply" : "Apply",
+
+
+    "DefaultText": "Default text",
+
+    
+    "RemoveAll": "Remove all data!",
+    "RemoveDay": "Remove days",
+    "Remove": "Remove",
+    "Removed": "Removed",
+    "Back": "Back"
+
+    
+}

@@ -1,0 +1,36 @@
+{
+    "Nickname" : "Sobrenombre",
+    "Password" : "Contraseña",
+    "GenerateNickname" : "Generar Apodo",
+    "GeneratePassword" : "Generar Contraseña",
+    "Enter" : "Entrar",
+
+    
+    "EmptyList" : "Sin datos",
+    "Today" : "Hoy:",
+    "DayExperience" : "¿Cómo estuvo tu día?",
+
+    "GridView" : "Cuadrícula",
+    "Themes" : "Temático",
+    "FontSize" : "Letra",
+    "RateApp" : "Estimar!",
+    "EraseData" : "Eliminación",
+    "Lang" : "Idioma",
+    "Exit" : "Desactivado.",
+
+
+    "Color" : "Color",
+    "Background" : "Fondo",
+    "BottomSheet" : "Panel",
+    "Apply" : "Aplicar",
+
+
+    "DefaultText": "Sólo texto",
+
+    
+    "RemoveAll": "Borrar todo!",
+    "RemoveDay": "Borrar días",
+    "Remove": "Eliminar",
+    "Removed": "Remoto",
+    "Back": "Atrás"
+}

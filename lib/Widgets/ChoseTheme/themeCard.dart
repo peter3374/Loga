@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MyThemeCard extends StatelessWidget {
@@ -70,7 +71,7 @@ class MyThemeCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Color',
+                          'Color'.tr(),
                           style: TextStyle(
                               fontSize: 21,
                               color:
@@ -91,7 +92,7 @@ class MyThemeCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Background',
+                          'Background'.tr(),
                           style: TextStyle(
                               fontSize: 21,
                               color:
@@ -112,7 +113,7 @@ class MyThemeCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Bottom sheet',
+                          'BottomSheet'.tr(),
                           style: TextStyle(
                               fontSize: 21,
                               color:

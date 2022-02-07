@@ -1,0 +1,36 @@
+{
+    "Nickname" : "Мянушка",
+    "Password" : "Пароль",
+    "GenerateNickname" : "Стварыць псеўданім",
+    "GeneratePassword" : "Згенераваць пароль",
+    "Enter" : "Увайсці",
+    
+    
+    "EmptyList" : "Няма дадзеных",
+    "Today" : "Сёння:",
+    "DayExperience" : "Як прайшоў дзень?",
+
+    "GridView" : "Сетка",
+    "Themes" : "Тэмы",
+    "FontSize" : "Шрыфт",
+    "RateApp" : "Ацаніць!",
+    "EraseData" : "Выдаленне",
+    "Lang" : "Мова",
+    "Exit" : "Выкл..",
+
+
+    "Color" : "Колер",
+    "Background" : "Фон",
+    "BottomSheet" : "Панэль",
+    "Apply" : "Прымяніць",
+
+
+    "DefaultText": "Проста тэкст",
+
+    
+    "RemoveAll": "Сцерці ўсё!",
+    "RemoveDay": "Сцерці дні",
+    "Remove": "Выдаліць",
+    "Removed": "Выдалены",
+    "Back": "Назад"
+}

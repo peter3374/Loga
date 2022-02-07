@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loda/Widgets/Locale/confirmButtonLocale.dart';
 import 'package:loda/Widgets/Locale/pickLocaleButton.dart';
+import 'package:loda/Widgets/dialogs.dart';
 
 class LocalePage extends StatefulWidget {
   LocalePage({Key? key}) : super(key: key);
@@ -33,13 +35,21 @@ class _LocalePageState extends State<LocalePage> with TickerProviderStateMixin {
     });
   }
 
-  final List<String> _localeText = ['English', 'Русский', 'España'];
-  final List<String> _countryCodes = [
-    'united-states',
-    'russia',
-    'spain',
+  final List<String> _localeText = [
+    'Беларуская мова',
+    'English',
+    'España',
+    'Polski',
+    'Русский',
   ];
-  int _opacity = 0;
+  final List<String> _countryCodes = [
+    'by',
+    'en',
+    'es',
+    'pl',
+    'ru',
+  ];
+  int _opacity = 0, clickedIndex = 0;
 
   double _buttonWidth = 10;
   double _buttonHeight = 10;
@@ -61,29 +71,72 @@ class _LocalePageState extends State<LocalePage> with TickerProviderStateMixin {
                       countryCode: _countryCodes[index],
                       onclick: () {
                         setState(() {
+                          clickedIndex = index;
                           _isClicked = !_isClicked;
                         });
-                        print(index);
+                        print(clickedIndex);
                       },
                       title: _localeText[index],
                       leadingIcon: Icons.local_restaurant,
                     );
                   }),
-              Text(
-                'Images by Flaticon.com',
-                style: TextStyle(
-                    color: Theme.of(context).textTheme.headline6!.color),
-              ),
+
               // buttons
 
               ConfirmButtonLocale(
-                text: 'Apply',
-                height: _buttonHeight,
-                width: _buttonWidth,
-                method: () => Navigator.pop(context),
-              ),
+                  text: 'Apply'.tr(),
+                  height: _buttonHeight,
+                  width: _buttonWidth,
+                  method: () {
+                    switch (clickedIndex) {
+                      case 0:
+                        translator.setNewLanguage(
+                          context,
+                          newLanguage: 'by',
+                          remember: true,
+                          restart: true,
+                        );
+
+                        break;
+                      case 1:
+                        translator.setNewLanguage(
+                          context,
+                          newLanguage: 'en',
+                          remember: true,
+                          restart: true,
+                        );
+                        // CustomDialogsCollection.showCustomSnackBar('Done.');
+                        break;
+                      case 2:
+                        translator.setNewLanguage(
+                          context,
+                          newLanguage: 'es',
+                          remember: true,
+                          restart: true,
+                        );
+                        break;
+                      case 3:
+                        translator.setNewLanguage(
+                          context,
+                          newLanguage: 'pl',
+                          remember: true,
+                          restart: true,
+                        );
+                        break;
+                      case 4:
+                        translator.setNewLanguage(
+                          context,
+                          newLanguage: 'ru',
+                          remember: true,
+                          restart: true,
+                        );
+
+                        break;
+                    }
+                    Navigator.pop(context);
+                  }),
               ConfirmButtonLocale(
-                text: 'Back',
+                text: 'Back'.tr(),
                 height: _buttonHeight,
                 width: _buttonWidth,
                 method: () => Navigator.pop(context),

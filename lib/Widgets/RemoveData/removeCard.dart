@@ -20,8 +20,7 @@ class RemoveCard extends StatelessWidget {
         child: Container(
           width: 170, // for image - 170
           height: 200, // for image - 300
-          child: Align(
-            alignment: Alignment.center,
+          child: FittedBox(
             child: Text(
               text,
               style: TextStyle(

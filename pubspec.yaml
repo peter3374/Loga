@@ -17,15 +17,19 @@ dependencies:
 
 
   # your packages:
-  sliding_up_panel:
-  hive_flutter:
+  sliding_up_panel: #down panel
+  hive_flutter: #save data #1
   hive:
-  intl:
+  intl: #date formatter 
   path_provider:
   provider:
-  parallax_rain:
-  shimmer: ^2.0.0 # for text animation
-  random_string: 
+  parallax_rain: # effect on login page
+  shimmer: ^2.0.0 # for text animation (themes)
+  random_string: #password generator
+
+  url_launcher: #for url
+  localize_and_translate: ^4.1.1
+
 
 
 dev_dependencies:
@@ -52,7 +56,8 @@ flutter:
     - assets/themeExample/
     - assets/gifChose/meme.gif
     - assets/flags/
-  #   - images/a_dot_ham.jpeg
+    - assets/locales/
+
 
 
   # To add custom fonts to your application, add a fonts section here,

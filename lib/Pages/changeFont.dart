@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loda/Widgets/ChangeFont/fontNavigationButton.dart';
 import 'package:loda/Widgets/ChangeFont/switchFontButton.dart';
 import 'package:loda/Widgets/Console/userTasksWidget.dart';
+import 'package:loda/model/Logic/ChangeFont/changeFontLogic.dart';
 import 'package:loda/model/database/todomodel.dart';
+import 'package:provider/src/provider.dart';
 
 class ChangeFont extends StatefulWidget {
   ChangeFont({Key? key}) : super(key: key);
@@ -13,8 +16,7 @@ class ChangeFont extends StatefulWidget {
 }
 
 class _ChangeFontState extends State<ChangeFont> {
-  double _fontFize = 12;
-  var userNameBox = Hive.box('user_data');
+  var _userDataStorage = Hive.box('user_data');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +30,9 @@ class _ChangeFontState extends State<ChangeFont> {
                 if (box.values.isEmpty) {
                   return Center(
                       child: Text(
-                    'Default text',
+                    'DefaultText'.tr(),
                     style: TextStyle(
-                      fontSize: _fontFize,
+                      fontSize: context.read<ChangeFontLogic>().fontSize,
                     ),
                   ));
                 } else {
@@ -43,10 +45,10 @@ class _ChangeFontState extends State<ChangeFont> {
                       ) {
                         TodoModel? todo = box.getAt(index);
                         return UserTasksFont(
-                          fontSize: _fontFize,
+                          fontSize: context.watch<ChangeFontLogic>().fontSize,
                           date: todo!.date.toString(),
-                          text: todo.text ?? "null",
-                          userName: userNameBox.get('nickname') ?? "null",
+                          text: todo.text,
+                          userName: _userDataStorage.get('nickname'),
                         );
                       });
                 }
@@ -61,7 +63,7 @@ class _ChangeFontState extends State<ChangeFont> {
                 fontSize: 12,
                 method: () {
                   setState(() {
-                    _fontFize = 12;
+                    context.read<ChangeFontLogic>().fontSize = 12;
                   });
                 },
               ),
@@ -69,7 +71,7 @@ class _ChangeFontState extends State<ChangeFont> {
                 fontSize: 13,
                 method: () {
                   setState(() {
-                    _fontFize = 13;
+                    context.read<ChangeFontLogic>().fontSize = 13;
                   });
                 },
               ),
@@ -77,7 +79,7 @@ class _ChangeFontState extends State<ChangeFont> {
                 fontSize: 14,
                 method: () {
                   setState(() {
-                    _fontFize = 14;
+                    context.read<ChangeFontLogic>().fontSize = 14;
                   });
                 },
               ),
@@ -85,23 +87,21 @@ class _ChangeFontState extends State<ChangeFont> {
                 fontSize: 15,
                 method: () {
                   setState(() {
-                    _fontFize = 15;
+                    context.read<ChangeFontLogic>().fontSize = 15;
                   });
                 },
               ),
               SwitchFontButton(
                 fontSize: 16,
                 method: () {
-                  setState(() {
-                    _fontFize = 16;
-                  });
+                  context.read<ChangeFontLogic>().fontSize = 16;
                 },
               ),
               SwitchFontButton(
                 fontSize: 17,
                 method: () {
                   setState(() {
-                    _fontFize = 17;
+                    context.read<ChangeFontLogic>().fontSize = 17;
                   });
                 },
               ),
@@ -122,7 +122,7 @@ class _ChangeFontState extends State<ChangeFont> {
             CustomFontNavigationButton(
               icon: Icons.done,
               method: () {
-                Hive.box('user_data').put('currentFontSize', _fontFize);
+                context.read<ChangeFontLogic>().changeFontSize();
               },
             ),
           ],

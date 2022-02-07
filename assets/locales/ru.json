@@ -1,0 +1,38 @@
+
+{
+    "Nickname" : "Никнейм",
+    "Password" : "Пароль",
+    "GenerateNickname" : "Генерировать никнейм",
+    "GeneratePassword" : "Генерировать пароль",
+    "Enter" : "Войти",
+
+    "EmptyList" : "Нет данных",
+    "Today" : "Сегодня:",
+    "DayExperience" : "Как прошел день?",
+
+    "GridView" : "Сетка",
+    "Themes" : "Темы",
+    "FontSize" : "Шрифт",
+    "RateApp" : "Оценить!",
+    "EraseData" : "Удаление",
+    "Lang" : "Язык",
+    "Exit" : "Выкл.",
+
+
+    "Color" : "Цвет",
+    "Background" : "Фон",
+    "BottomSheet" : "Панель",
+    "Apply" : "Применить",
+
+
+    "DefaultText": "Просто текст",
+
+    
+    "RemoveAll": "Стереть всё!",
+    "RemoveDay": "Стереть дни",
+    "Remove": "Удалить",
+    "Removed": "Удалено",
+    "Back": "Назад"
+
+    
+}

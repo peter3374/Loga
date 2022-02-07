@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:hive/hive.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'dart:math' as math;
 
 import 'package:loda/Widgets/RemoveData/removeCard.dart';
@@ -40,7 +41,7 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black54,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -48,7 +49,7 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               RemoveCard(
-                text: "Remove all data!",
+                text: "RemoveAll".tr(),
                 isClicked: _isClicked1,
                 method: () {
                   setState(() {
@@ -68,7 +69,7 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                 },
               ),
               RemoveCard(
-                text: "Remove day reports.",
+                text: "RemoveDay".tr(),
                 isClicked: _isClicked2,
                 method: () {
                   //  Hive.deleteBoxFromDisk('user_reports');
@@ -130,7 +131,7 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                     ),
                     border: UnderlineInputBorder(),
                     prefixIconColor: Theme.of(context).primaryColor,
-                    hintText: 'Password:',
+                    hintText: 'Password'.tr(),
                     hintStyle: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
@@ -187,7 +188,7 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                         ),
                       ),
                       Text(
-                        _applyValue ? 'Removed' : 'Remove',
+                        _applyValue ? 'Removed'.tr() : 'Remove'.tr(),
                         style: TextStyle(
                             color:
                                 Theme.of(context).textTheme.headline6!.color),
@@ -227,7 +228,7 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
                         size: 30,
                       ),
                       Text(
-                        'Back',
+                        'Back'.tr(),
                         style: TextStyle(
                             color:
                                 Theme.of(context).textTheme.headline6!.color),

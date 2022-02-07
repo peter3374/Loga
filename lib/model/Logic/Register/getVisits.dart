@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 class UserData {
@@ -6,11 +8,10 @@ class UserData {
       Hive.box('user_data')
           .put('currentTheme', 'darkMode'); // set default theme
       Hive.box('user_data').put('currentFontSize', 12.0); // set default font
-      print('first time');
+      log('First Visit');
       return true;
     } else {
-      print('not first time');
-      print('current font size: ${Hive.box('user_data').get(
+      log('current font size: ${Hive.box('user_data').get(
         'currentFontSize',
       )}');
       return false;

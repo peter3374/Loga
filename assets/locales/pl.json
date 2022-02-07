@@ -1,0 +1,37 @@
+{ 
+
+    "Nickname" : "Nick",
+    "Password" : "Hasło",
+    "GenerateNickname" : "Wygeneruj Nick",
+    "GeneratePassword" : "Wygeneruj Hasło",
+    "Enter" : "Enter",
+
+    
+    "EmptyList" : "Brak danych",
+    "Today" : "Dzisiaj:",
+    "DayExperience" : "Jak minął dzień?",
+
+    "GridView" : "Siatka",
+    "Themes" : "Tematy",
+    "FontSize" : "Czcionka",
+    "RateApp" : "Oceń aplikację!",
+    "EraseData" : "Wymaż dane",
+    "Lang" : "Język",
+    "Exit" : "Wyłącz",
+
+
+    "Color" : "Kolor",
+    "Background" : "Tło",
+    "BottomSheet" : "Panel",
+    "Apply" : "Zastosować",
+
+
+    "DefaultText": "Tylko tekst",
+
+    
+    "RemoveAll": "Skasuj wszystko!",
+    "RemoveDay": "Wymazać dni",
+    "Remove": "Usunąć",
+    "Removed": "Usunięto",
+    "Back": "Do tyłu"
+}

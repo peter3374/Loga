@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.loda">
+     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+      <uses-permission android:name="android.permission.BLUETOOTH"
+                     android:maxSdkVersion="30" />
    <application
         android:label="Loga"
         android:name="${applicationName}"

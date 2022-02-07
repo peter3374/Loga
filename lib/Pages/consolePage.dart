@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loda/Pages/changeFont.dart';
 import 'package:loda/Pages/locale.dart';
 import 'package:loda/Pages/pickTheme.dart';
@@ -10,8 +11,12 @@ import 'package:loda/Pages/removeData.dart';
 import 'package:loda/Themes/theme_manager.dart';
 import 'package:loda/Widgets/Console/consoleButton.dart';
 import 'package:loda/Widgets/Console/userTasksWidget.dart';
+import 'package:loda/Widgets/dialogs.dart';
+import 'package:loda/model/Logic/ChangeFont/changeFontLogic.dart';
 import 'package:loda/model/database/todomodel.dart';
 import 'package:provider/src/provider.dart';
+
+import 'package:url_launcher/url_launcher.dart';
 
 class ConsolePage extends StatefulWidget {
   @override
@@ -19,15 +24,15 @@ class ConsolePage extends StatefulWidget {
 }
 
 class _ConsolePageState extends State<ConsolePage> {
-  bool _isCheckedRmReports = false, _isCheckedRmAll = false;
-
   TextEditingController _textEditingController = TextEditingController();
-
   ScrollController _scrollConsoleController =
       ScrollController(initialScrollOffset: 0);
   @override
   void initState() {
     super.initState();
+
+    context.read<ChangeFontLogic>().fontSize =
+        userDataBox.get('currentFontSize');
     _scrollConsoleToLast();
   }
 
@@ -36,7 +41,7 @@ class _ConsolePageState extends State<ConsolePage> {
     super.dispose();
   }
 
-  Future _scrollConsoleToLast() async {
+  _scrollConsoleToLast() {
 //FIXED   ScrollController not attached to any scroll views.
     if (_scrollConsoleController.hasClients) {
       if (Hive.box<TodoModel>('user_reports').values.isEmpty) {
@@ -78,7 +83,7 @@ class _ConsolePageState extends State<ConsolePage> {
                   if (box.values.isEmpty) {
                     return Center(
                         child: Text(
-                      'Empty list \😔',
+                      'EmptyList'.tr() + ' \😔',
                       style: TextStyle(
                         fontSize: 22,
                       ),
@@ -94,7 +99,7 @@ class _ConsolePageState extends State<ConsolePage> {
                         ) {
                           TodoModel? todo = box.getAt(index);
                           return UserMessage(
-                            fontSize: userDataBox.get('currentFontSize'),
+                            fontSize: context.watch<ChangeFontLogic>().fontSize,
                             date: todo!.date.toString(),
                             text: todo.text ?? "null",
                             userName: userDataBox.get('nickname') ?? "null",
@@ -138,7 +143,8 @@ class _ConsolePageState extends State<ConsolePage> {
                           ),
                         ),
                         Text(
-                          'Today:  ${DateFormat('yMd').format(_timeNow)}',
+                          'Today'.tr() +
+                              ' ${DateFormat('yMd').format(_timeNow)}',
                           softWrap: true,
                           textAlign: TextAlign.left,
                           maxLines: 3,
@@ -154,6 +160,8 @@ class _ConsolePageState extends State<ConsolePage> {
                               // maxWidth: MediaQuery.of(context).size.height * 0.1,
                               maxWidth: 250,
                               child: TextField(
+                                maxLines: 1,
+                                
                                 controller: _textEditingController,
                                 autocorrect: true,
                                 cursorWidth: 8,
@@ -162,7 +170,7 @@ class _ConsolePageState extends State<ConsolePage> {
                                   border: InputBorder.none,
                                   prefixIconColor:
                                       Theme.of(context).primaryColor,
-                                  hintText: 'Enter your day experience:',
+                                  hintText: 'DayExperience'.tr(),
                                   hintStyle: TextStyle(
                                     color: Theme.of(context).buttonColor,
                                   ),
@@ -182,12 +190,16 @@ class _ConsolePageState extends State<ConsolePage> {
                                 ),
                               ),
                             ),
-                            Icon(
-                              Icons.mic,
-                              color: Theme.of(context).buttonColor,
-                            ),
+                            // InkWell(
+                            //   onTap: () => _listen(),
+                            //   child: Icon(
+                            //     _isListening ? Icons.mic : Icons.mic_none,
+                            //     color: Theme.of(context).buttonColor,
+                            //   ),
+                            // ),
                           ],
                         ),
+                        // buttons
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Wrap(
@@ -202,13 +214,13 @@ class _ConsolePageState extends State<ConsolePage> {
                               // ),
                               ConsoleButton(
                                 leadingIcon: Icons.grid_4x4_outlined,
-                                title: 'GridView',
+                                title: 'GridView'.tr(),
                                 onclick: () => null,
                               ),
 
                               ConsoleButton(
                                 leadingIcon: Icons.style,
-                                title: 'Themes',
+                                title: 'Themes'.tr(),
                                 onclick: () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) =>
@@ -216,7 +228,7 @@ class _ConsolePageState extends State<ConsolePage> {
                               ),
                               ConsoleButton(
                                 leadingIcon: Icons.format_size,
-                                title: 'Font Size',
+                                title: 'FontSize'.tr(),
                                 onclick: () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) => ChangeFont())),
@@ -228,12 +240,12 @@ class _ConsolePageState extends State<ConsolePage> {
                               // ),
                               ConsoleButton(
                                 leadingIcon: Icons.star,
-                                title: 'Rate app!',
+                                title: 'RateApp'.tr(),
                                 onclick: () => null,
                               ),
                               ConsoleButton(
-                                  leadingIcon: Icons.remove_circle,
-                                  title: 'Erase data',
+                                  leadingIcon: Icons.delete,
+                                  title: 'EraseData'.tr(),
                                   onclick: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
@@ -241,15 +253,15 @@ class _ConsolePageState extends State<ConsolePage> {
                                                 RemoveData()));
                                   }),
                               ConsoleButton(
-                                leadingIcon: Icons.language_outlined,
-                                title: 'Locale',
+                                leadingIcon: Icons.translate,
+                                title: 'Lang'.tr(),
                                 onclick: () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) => LocalePage())),
                               ),
                               ConsoleButton(
                                 leadingIcon: Icons.power_settings_new,
-                                title: 'Exit',
+                                title: 'Exit'.tr(),
                                 onclick: () => exit(0),
                               ),
                             ],

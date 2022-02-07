@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loda/Pages/consolePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,14 +79,12 @@ class _RegisterState extends State<Register> {
                 children: [
                   _logo(),
                   CustomTextField(
-                    method: () => print('soon'),
-                    hintText: 'Nickname:',
+                    hintText: 'Nickname'.tr(),
                     textEditingController: _nicknameController,
                     maxLength: 20,
                   ),
                   CustomTextField(
-                    method: () => print('soon'),
-                    hintText: 'Password:',
+                    hintText: 'Password'.tr(),
                     textEditingController: _passwordController,
                     maxLength: 20,
                   ),
@@ -97,54 +96,76 @@ class _RegisterState extends State<Register> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Generate nickname',
+                        'GenerateNickname'.tr(),
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      CupertinoSwitch(
-                        thumbColor: Theme.of(context).scaffoldBackgroundColor,
-                        value: _nicknameStatus,
-                        onChanged: (value) {
-                          setState(() {
-                            _nicknameStatus = value;
-                            if (_nicknameStatus) {
-                              _nicknameController.text =
-                                  GeneratedNicknames.nickNames[Random().nextInt(
-                                      GeneratedNicknames.nickNames.length)];
-                            } else {
-                              _nicknameController.text = '';
-                            }
-                          });
-                        },
-                        activeColor: Colors.white,
-                      ),
+                      StatefulBuilder(builder: (context, state) {
+                        return CupertinoSwitch(
+                          thumbColor: Theme.of(context).scaffoldBackgroundColor,
+                          value: _nicknameStatus,
+                          onChanged: (value) {
+                            state(() {
+                              _nicknameStatus = value;
+                              if (_nicknameStatus) {
+                                _nicknameController.text = GeneratedNicknames
+                                        .nickNames[
+                                    Random().nextInt(
+                                        GeneratedNicknames.nickNames.length)];
+                              } else {
+                                _nicknameController.text = '';
+                              }
+                            });
+                          },
+                          activeColor: Colors.white,
+                        );
+                      }),
+                      // CupertinoSwitch(
+                      //   thumbColor: Theme.of(context).scaffoldBackgroundColor,
+                      //   value: _nicknameStatus,
+                      //   onChanged: (value) {
+                      //     setState(() {
+                      //       _nicknameStatus = value;
+                      //       if (_nicknameStatus) {
+                      //         _nicknameController.text =
+                      //             GeneratedNicknames.nickNames[Random().nextInt(
+                      //                 GeneratedNicknames.nickNames.length)];
+                      //       } else {
+                      //         _nicknameController.text = '';
+                      //       }
+                      //     });
+                      //   },
+                      //   activeColor: Colors.white,
+                      // ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Generate password',
+                        'GeneratePassword'.tr(),
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      CupertinoSwitch(
-                        value: _passwordStatus,
-                        onChanged: (value) {
-                          setState(() {
-                            _passwordStatus = value;
-                            if (_passwordStatus) {
-                              _passwordController.text = randomString(8);
-                            } else {
-                              _passwordController.text = '';
-                            }
-                          });
-                        },
-                        thumbColor: Theme.of(context).scaffoldBackgroundColor,
-                        activeColor: Colors.white,
-                      ),
+                      StatefulBuilder(builder: (context, state) {
+                        return CupertinoSwitch(
+                          value: _passwordStatus,
+                          onChanged: (value) {
+                            state(() {
+                              _passwordStatus = value;
+                              if (_passwordStatus) {
+                                _passwordController.text = randomString(8);
+                              } else {
+                                _passwordController.text = '';
+                              }
+                            });
+                          },
+                          thumbColor: Theme.of(context).scaffoldBackgroundColor,
+                          activeColor: Colors.white,
+                        );
+                      }),
                     ],
                   ),
                   // enter
@@ -154,8 +175,8 @@ class _RegisterState extends State<Register> {
                         _errorhandler = _verification();
                       });
                     },
-                    child: const Text(
-                      'Enter',
+                    child: Text(
+                      'Enter'.tr(),
                       style: TextStyle(fontSize: 22),
                     ),
                   ),

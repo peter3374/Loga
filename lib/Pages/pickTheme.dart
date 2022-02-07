@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 
 import 'package:loda/Pages/themeVariables.dart';
 import 'package:loda/Themes/theme_constants.dart';
 import 'package:loda/Themes/theme_manager.dart';
 
 import 'package:loda/Widgets/ChoseTheme/themeCard.dart';
+import 'package:loda/Widgets/dialogs.dart';
 
 import 'package:provider/src/provider.dart';
 
@@ -25,6 +27,7 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
     'Default'
   ];
   Box _hiveStorage = Hive.box('user_data');
+  // Hive.box('user_data').name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +36,7 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
           elevation: 0,
           toolbarHeight: 70,
           centerTitle: true,
-          title: const Text('Themes'),
+          title: Text('Themes'.tr()),
           flexibleSpace: Container(
             width: double.infinity,
             height: 70,
@@ -55,13 +58,7 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
                     // int selected = index;
                     switch (index) {
                       case 0:
-                        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //   content: Text(
-                        //     'Soon',
-                        //     style: TextStyle(color: Colors.white),
-                        //   ),
-                        //   backgroundColor: Colors.black,
-                        // ));
+                        CustomDialogsCollection.showCustomSnackBar('Demo');
                         print('green');
                         context
                             .read<ThemeManager>()
@@ -73,13 +70,7 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
 
                         break;
                       case 1:
-                        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //   content: Text(
-                        //     'Soon',
-                        //     style: TextStyle(color: Colors.white),
-                        //   ),
-                        //   backgroundColor: Colors.black,
-                        // ));
+                        CustomDialogsCollection.showCustomSnackBar('Demo');
                         print('red');
                         context.read<ThemeManager>().setThemeData(darkRedMode);
                         // sheet
@@ -101,13 +92,8 @@ class _SwitchThemePageState extends State<SwitchThemePage> {
 
                         break;
                       case 3:
-                        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //   content: Text(
-                        //     'Soon',
-                        //     style: TextStyle(color: Colors.white),
-                        //   ),
-                        //   backgroundColor: Colors.black,
-                        // ));
+                        CustomDialogsCollection.showCustomSnackBar('Demo');
+
                         context.read<ThemeManager>().setThemeData(darkPinkMode);
                         // sheet
                         context.read<ThemeManager>().sheetColor =
