@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class UserMessage extends StatelessWidget {
-  double fontSize = 12;
-  final String date, userName, text;
+  final double fontSize;
+  final String date;
+  final String userName;
+  final String text;
 
-  UserMessage(
-      {Key? key,
-      required this.fontSize,
-      required this.date,
-      required this.text,
-      required this.userName})
-      : super(key: key);
+  UserMessage({
+    Key? key,
+    this.fontSize = 12,
+    required this.date,
+    required this.text,
+    required this.userName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +42,9 @@ class UserMessage extends StatelessWidget {
                 softWrap: true,
                 //   maxLines: 3,
                 style: TextStyle(
-                    color: Theme.of(context).textTheme.headline6!.color,
-                    fontSize: fontSize),
+                  color: Theme.of(context).textTheme.headline6!.color,
+                  fontSize: fontSize,
+                ),
               ),
             ),
             Flexible(
@@ -50,8 +53,9 @@ class UserMessage extends StatelessWidget {
                 overflow: TextOverflow.fade,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                    color: Theme.of(context).textTheme.headline6!.color,
-                    fontSize: fontSize),
+                  color: Theme.of(context).textTheme.headline6!.color,
+                  fontSize: fontSize,
+                ),
               ),
             ),
           ],
@@ -62,15 +66,17 @@ class UserMessage extends StatelessWidget {
 }
 
 class UserTasksFont extends StatelessWidget {
-  final String date, userName, text;
-  double fontSize = 12;
-  UserTasksFont(
-      {Key? key,
-      required this.fontSize,
-      required this.date,
-      required this.text,
-      required this.userName})
-      : super(key: key);
+  final String date;
+  final String userName;
+  final String text;
+  final double fontSize;
+  UserTasksFont({
+    Key? key,
+    this.fontSize = 12,
+    required this.date,
+    required this.text,
+    required this.userName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +87,12 @@ class UserTasksFont extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(3.5),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(9),
-                border: Border.all(color: Theme.of(context).hintColor)),
+              borderRadius: BorderRadius.circular(9),
+              border: Border.all(color: Theme.of(context).hintColor),
+            ),
             child: Text(
               date,
               style: TextStyle(
-                
                   color: Theme.of(context).textTheme.headline6!.color),
             ),
           ),
@@ -101,8 +107,9 @@ class UserTasksFont extends StatelessWidget {
                 softWrap: true,
                 maxLines: 3,
                 style: TextStyle(
-                    color: Theme.of(context).textTheme.headline6!.color,
-                    fontSize: 15),
+                  color: Theme.of(context).textTheme.headline6!.color,
+                  fontSize: 15,
+                ),
               ),
             ),
             Flexible(
@@ -111,8 +118,9 @@ class UserTasksFont extends StatelessWidget {
                 overflow: TextOverflow.fade,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                    color: Theme.of(context).textTheme.headline6!.color,
-                    fontSize: fontSize),
+                  color: Theme.of(context).textTheme.headline6!.color,
+                  fontSize: fontSize,
+                ),
               ),
             ),
           ],

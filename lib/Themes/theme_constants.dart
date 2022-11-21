@@ -10,13 +10,12 @@ ThemeData darkGreenMode = ThemeData(
       headline6: TextStyle(color: Colors.green),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(primary: Colors.green),
+      style: TextButton.styleFrom(foregroundColor: Colors.green),
     ),
-    brightness: Brightness.dark,
-    accentColor: Colors.green, // buttons color + scroll effect color
+    brightness: Brightness.dark, // buttons color + scroll effect color
     primaryColor: Colors.green, // appbar + textfield length
     buttonColor: Colors.green,
-    dialogBackgroundColor: Colors.green);
+    dialogBackgroundColor: Colors.green, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.green));
 // pay
 ThemeData darkRedMode = ThemeData(
     appBarTheme: const AppBarTheme(color: Colors.red),
@@ -29,11 +28,10 @@ ThemeData darkRedMode = ThemeData(
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(primary: Colors.red),
     ),
-    brightness: Brightness.dark,
-    accentColor: Colors.red, // buttons color + scroll effect color
+    brightness: Brightness.dark, // buttons color + scroll effect color
     primaryColor: Colors.red, // appbar + textfield length
     buttonColor: Colors.red,
-    dialogBackgroundColor: Colors.red);
+    dialogBackgroundColor: Colors.red, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.red));
 
 // pay
 ThemeData darkPinkMode = ThemeData(
@@ -47,11 +45,10 @@ ThemeData darkPinkMode = ThemeData(
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(primary: Colors.pink),
     ),
-    brightness: Brightness.dark,
-    accentColor: Colors.pink, // buttons color + scroll effect color
+    brightness: Brightness.dark, // buttons color + scroll effect color
     primaryColor: Colors.pink, // appbar + textfield length
     buttonColor: Colors.pink,
-    dialogBackgroundColor: Colors.pink);
+    dialogBackgroundColor: Colors.pink, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.pink));
 
 ThemeData darkOrangeMode = ThemeData(
     appBarTheme: const AppBarTheme(color: Colors.deepOrangeAccent),
@@ -62,13 +59,12 @@ ThemeData darkOrangeMode = ThemeData(
       headline6: TextStyle(color: Colors.deepOrangeAccent),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(primary: Colors.deepOrangeAccent),
+      style: TextButton.styleFrom(foregroundColor: Colors.deepOrangeAccent),
     ),
-    brightness: Brightness.dark,
-    accentColor: Colors.deepOrangeAccent, // buttons color + scroll effect color
+    brightness: Brightness.dark, // buttons color + scroll effect color
     primaryColor: Colors.deepOrangeAccent, // appbar + textfield length
     buttonColor: Colors.deepOrangeAccent,
-    dialogBackgroundColor: Colors.deepOrangeAccent);
+    dialogBackgroundColor: Colors.deepOrangeAccent, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.deepOrangeAccent));
 
 // middle day default theme
 ThemeData darkMode = ThemeData(
@@ -80,13 +76,12 @@ ThemeData darkMode = ThemeData(
       headline6: TextStyle(color: Colors.white),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(primary: Colors.white),
+      style: TextButton.styleFrom(foregroundColor: Colors.white),
     ),
-    brightness: Brightness.dark,
-    accentColor: Colors.black, // buttons color + scroll effect color
+    brightness: Brightness.dark, // buttons color + scroll effect color
     primaryColor: Colors.white, // appbar + textfield length
     buttonColor: Colors.white,
-    dialogBackgroundColor: Colors.white);
+    dialogBackgroundColor: Colors.white, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black));
 // power light
 ThemeData lightMode = ThemeData(
     switchTheme: SwitchThemeData(
@@ -100,10 +95,9 @@ ThemeData lightMode = ThemeData(
       headline6: TextStyle(color: Colors.black),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(primary: Colors.black),
+      style: TextButton.styleFrom(foregroundColor: Colors.black),
     ),
-    brightness: Brightness.light,
-    accentColor: Colors.black, // buttons color + scroll effect color
+    brightness: Brightness.light, // buttons color + scroll effect color
     primaryColor: Colors.black, // appbar + textfield length
     buttonColor: Colors.black,
-    dialogBackgroundColor: Colors.black);
+    dialogBackgroundColor: Colors.black, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black));

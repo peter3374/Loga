@@ -6,13 +6,13 @@ class ConsoleButton extends StatelessWidget {
   final Color? color;
   final String? title;
 
-  ConsoleButton(
-      {Key? key,
-      this.onclick,
-      this.leadingIcon,
-      this.title,
-      this.color = Colors.white})
-      : super(key: key);
+  ConsoleButton({
+    Key? key,
+    this.onclick,
+    this.leadingIcon,
+    this.title,
+    this.color = Colors.white,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +40,16 @@ class ConsoleButton extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            title!,
-            style: TextStyle(
+          FittedBox(
+            child: Text(
+              title!,
+              style: TextStyle(
                 fontSize: 20,
                 color: Theme.of(context).textTheme.headline6!.color,
-                fontWeight: FontWeight.w300),
-          ),
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          )
         ],
       ),
     );

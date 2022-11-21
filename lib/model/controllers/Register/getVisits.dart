@@ -5,9 +5,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 class UserData {
   static Future<bool> getUserVisits() async {
     if (Hive.box('user_data').get('nickname') == null) {
-      Hive.box('user_data')
+      await Hive.box('user_data')
           .put('currentTheme', 'darkMode'); // set default theme
-      Hive.box('user_data').put('currentFontSize', 12.0); // set default font
+      await Hive.box('user_data')
+          .put('currentFontSize', 12.0); // set default font
       log('First Visit');
       return true;
     } else {

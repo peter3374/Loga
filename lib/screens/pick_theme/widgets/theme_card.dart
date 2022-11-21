@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MyThemeCard extends StatelessWidget {
+class ThemeCard extends StatelessWidget {
   final VoidCallback? method;
   final shimmerBase, shimmerHightlight, color1, color2, color3, buttonTitle;
 
   final String title, imgCodeName;
 
-  const MyThemeCard({
+  const ThemeCard({
     Key? key,
     required this.buttonTitle,
     @required this.method,
@@ -25,8 +25,9 @@ class MyThemeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: const Color(0xFF011D1F),
-          borderRadius: BorderRadius.circular(8)),
+        color: const Color(0xFF011D1F),
+        borderRadius: BorderRadius.circular(8),
+      ),
       width: 350,
       height: 270,
       child: Column(
@@ -127,7 +128,7 @@ class MyThemeCard extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: method,
                       child: Text(buttonTitle),
-                      style: ElevatedButton.styleFrom(primary: Colors.green),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                     ),
                   ),
                 ],

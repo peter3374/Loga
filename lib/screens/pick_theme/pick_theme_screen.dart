@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-
-import 'package:loda/Pages/themeVariables.dart';
-import 'package:loda/Themes/theme_constants.dart';
-import 'package:loda/Themes/theme_manager.dart';
-
-import 'package:loda/Widgets/ChoseTheme/themeCard.dart';
-import 'package:loda/Widgets/dialogs.dart';
+import 'package:loga/Widgets/pick_theme/themeCard.dart';
+import 'package:loga/themes/themeVariables.dart';
+import 'package:loga/Themes/theme_constants.dart';
+import 'package:loga/Themes/theme_manager.dart';
+import 'package:loga/Widgets/dialogs.dart';
 
 import 'package:provider/src/provider.dart';
 
-class SwitchThemePage extends StatefulWidget {
+class PickThemeScreen extends StatefulWidget {
   @override
-  _SwitchThemePageState createState() => _SwitchThemePageState();
+  _PickThemeScreenState createState() => _PickThemeScreenState();
 }
 
 // Save theme only if it paid; Toll themes can apply but save! Just for demo
-class _SwitchThemePageState extends State<SwitchThemePage> {
+class _PickThemeScreenState extends State<PickThemeScreen> {
   static List<String> _buttonTitles = [
     '0.99 USD',
     '0.99 USD',

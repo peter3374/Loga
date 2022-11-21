@@ -1,38 +1,35 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loda/Pages/changeFont.dart';
-import 'package:loda/Pages/locale.dart';
-import 'package:loda/Pages/pickTheme.dart';
-import 'package:loda/Pages/removeData.dart';
-import 'package:loda/Themes/theme_manager.dart';
-import 'package:loda/Widgets/Console/consoleButton.dart';
-import 'package:loda/Widgets/Console/userTasksWidget.dart';
-import 'package:loda/Widgets/dialogs.dart';
-import 'package:loda/model/Logic/ChangeFont/changeFontLogic.dart';
-import 'package:loda/model/database/todomodel.dart';
+import 'package:loga/model/controllers/ChangeFont/changeFontLogic.dart';
+import 'package:loga/model/controllers/Console/speechLogic.dart';
+import 'package:loga/screens/change_font/change_font.dart';
+import 'package:loga/screens/locale/locale_screen.dart';
+import 'package:loga/screens/pick_theme/pick_theme_screen.dart';
+import 'package:loga/screens/erase_data/erase_data_screen.dart';
+import 'package:loga/Widgets/Console/consoleButton.dart';
+import 'package:loga/Widgets/Console/userTasksWidget.dart';
+import 'package:loga/model/database/todomodel.dart';
 import 'package:provider/src/provider.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
-class ConsolePage extends StatefulWidget {
+class ConsoleScreen extends StatefulWidget {
   @override
-  State<ConsolePage> createState() => _ConsolePageState();
+  State<ConsoleScreen> createState() => _ConsoleScreenState();
 }
 
-class _ConsolePageState extends State<ConsolePage> {
+class _ConsoleScreenState extends State<ConsoleScreen> {
   TextEditingController _textEditingController = TextEditingController();
   ScrollController _scrollConsoleController =
       ScrollController(initialScrollOffset: 0);
+
   @override
   void initState() {
     super.initState();
-
+    context.read<SpeechLogic>().initSpeech();
     context.read<ChangeFontLogic>().fontSize =
-        userDataBox.get('currentFontSize');
+        Hive.box('user_data').get('currentFontSize');
     _scrollConsoleToLast();
   }
 
@@ -65,7 +62,6 @@ class _ConsolePageState extends State<ConsolePage> {
   }
 
   DateTime _timeNow = DateTime.now();
-  var userDataBox = Hive.box('user_data');
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +98,8 @@ class _ConsolePageState extends State<ConsolePage> {
                             fontSize: context.watch<ChangeFontLogic>().fontSize,
                             date: todo!.date.toString(),
                             text: todo.text ?? "null",
-                            userName: userDataBox.get('nickname') ?? "null",
+                            userName:
+                                Hive.box('user_data').get('nickname') ?? "null",
                           );
                         });
                   }
@@ -120,9 +117,10 @@ class _ConsolePageState extends State<ConsolePage> {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(14),
                       topRight: Radius.circular(14)),
-                  color: context.watch<ThemeManager>().sheetColor,
+                  // TODO error here
+                  // color: context.watch<ThemeManager>().sheetColor,
 
-                  //Provider.of<ThemeManager>(context,listen: true).sheetColor,
+                  //
                   child: SingleChildScrollView(
                     // physics: PageScrollPhysics(),
                     controller: controller,
@@ -153,51 +151,69 @@ class _ConsolePageState extends State<ConsolePage> {
                                   Theme.of(context).textTheme.headline6!.color,
                               fontSize: 15),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            LimitedBox(
-                              // maxWidth: MediaQuery.of(context).size.height * 0.1,
-                              maxWidth: 250,
-                              child: TextField(
-                                maxLines: 1,
-                                
-                                controller: _textEditingController,
-                                autocorrect: true,
-                                cursorWidth: 8,
-                                cursorColor: Theme.of(context).buttonColor,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIconColor:
-                                      Theme.of(context).primaryColor,
-                                  hintText: 'DayExperience'.tr(),
-                                  hintStyle: TextStyle(
+                        StatefulBuilder(
+                          builder: (context, state) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                LimitedBox(
+                                  // maxWidth: MediaQuery.of(context).size.height * 0.1,
+                                  maxWidth: 250,
+                                  child: TextField(
+                                    maxLines: 1,
+                                    controller: _textEditingController,
+                                    autocorrect: true,
+                                    cursorWidth: 8,
+                                    cursorColor: Theme.of(context).buttonColor,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      prefixIconColor:
+                                          Theme.of(context).primaryColor,
+                                      hintText: 'DayExperience'.tr(),
+                                      hintStyle: TextStyle(
+                                        color: Theme.of(context).buttonColor,
+                                      ),
+                                      focusColor: Theme.of(context).buttonColor,
+                                      hoverColor: Theme.of(context).buttonColor,
+                                    ),
+                                  ),
+                                ),
+                                Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () => _saveData(),
+                                    splashColor: Theme.of(context).buttonColor,
+                                    child: Icon(
+                                      Icons.send,
+                                      color: Theme.of(context).buttonColor,
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () => context
+                                          .read<SpeechLogic>()
+                                          .speechToTextGet
+                                          .isNotListening
+                                      ? context
+                                          .read<SpeechLogic>()
+                                          .startListening(
+                                              _textEditingController)
+                                      : context
+                                          .read<SpeechLogic>()
+                                          .stopListening(),
+                                  child: Icon(
+                                    context
+                                            .read<SpeechLogic>()
+                                            .speechToTextGet
+                                            .isNotListening
+                                        ? Icons.mic_none
+                                        : Icons.mic,
                                     color: Theme.of(context).buttonColor,
                                   ),
-                                  focusColor: Theme.of(context).buttonColor,
-                                  hoverColor: Theme.of(context).buttonColor,
                                 ),
-                              ),
-                            ),
-                            Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () => _saveData(),
-                                splashColor: Theme.of(context).buttonColor,
-                                child: Icon(
-                                  Icons.send,
-                                  color: Theme.of(context).buttonColor,
-                                ),
-                              ),
-                            ),
-                            // InkWell(
-                            //   onTap: () => _listen(),
-                            //   child: Icon(
-                            //     _isListening ? Icons.mic : Icons.mic_none,
-                            //     color: Theme.of(context).buttonColor,
-                            //   ),
-                            // ),
-                          ],
+                              ],
+                            );
+                          },
                         ),
                         // buttons
                         Padding(
@@ -224,14 +240,15 @@ class _ConsolePageState extends State<ConsolePage> {
                                 onclick: () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            SwitchThemePage())),
+                                            PickThemeScreen())),
                               ),
                               ConsoleButton(
                                 leadingIcon: Icons.format_size,
                                 title: 'FontSize'.tr(),
                                 onclick: () => Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (context) => ChangeFont())),
+                                        builder: (context) =>
+                                            ChangeFontSizeScreen())),
                               ),
                               // CustomButton1(
                               //   leadingIcon: Icons.timeline,
@@ -250,14 +267,14 @@ class _ConsolePageState extends State<ConsolePage> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                RemoveData()));
+                                                EraseDataScreen()));
                                   }),
                               ConsoleButton(
                                 leadingIcon: Icons.translate,
                                 title: 'Lang'.tr(),
                                 onclick: () => Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (context) => LocalePage())),
+                                        builder: (context) => LocaleScreen())),
                               ),
                               ConsoleButton(
                                 leadingIcon: Icons.power_settings_new,

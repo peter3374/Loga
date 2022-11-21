@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loda/Widgets/Locale/confirmButtonLocale.dart';
-import 'package:loda/Widgets/Locale/pickLocaleButton.dart';
-import 'package:loda/Widgets/dialogs.dart';
+import 'package:loga/Widgets/Locale/confirmButtonLocale.dart';
+import 'package:loga/Widgets/Locale/pickLocaleButton.dart';
+import 'package:loga/Widgets/dialogs.dart';
 
-class LocalePage extends StatefulWidget {
-  LocalePage({Key? key}) : super(key: key);
+class LocaleScreen extends StatefulWidget {
+  LocaleScreen({Key? key}) : super(key: key);
 
   @override
-  State<LocalePage> createState() => _LocalePageState();
+  State<LocaleScreen> createState() => _LocaleScreenState();
 }
 
-class _LocalePageState extends State<LocalePage> with TickerProviderStateMixin {
+class _LocaleScreenState extends State<LocaleScreen>
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   bool _isClicked = false;
@@ -24,11 +25,12 @@ class _LocalePageState extends State<LocalePage> with TickerProviderStateMixin {
         AnimationController(vsync: this, duration: Duration(seconds: 2));
     _animation =
         Tween<double>(begin: 0, end: 1.0).animate(_animationController);
+
     _animationController.forward(); // run animation
   }
 
   _animateButton() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 600));
     setState(() {
       _buttonWidth = 100;
       _buttonHeight = 50;
@@ -51,7 +53,7 @@ class _LocalePageState extends State<LocalePage> with TickerProviderStateMixin {
   ];
   int _opacity = 0, clickedIndex = 0;
 
-  double _buttonWidth = 10;
+  double _buttonWidth = 5;
   double _buttonHeight = 10;
   @override
   Widget build(BuildContext context) {

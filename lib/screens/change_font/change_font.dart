@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loda/Widgets/ChangeFont/fontNavigationButton.dart';
-import 'package:loda/Widgets/ChangeFont/switchFontButton.dart';
-import 'package:loda/Widgets/Console/userTasksWidget.dart';
-import 'package:loda/model/Logic/ChangeFont/changeFontLogic.dart';
-import 'package:loda/model/database/todomodel.dart';
+import 'package:loga/Widgets/Console/userTasksWidget.dart';
+import 'package:loga/model/controllers/ChangeFont/changeFontLogic.dart';
+import 'package:loga/model/database/todomodel.dart';
+import 'package:loga/screens/change_font/widgets/font_navigation_button.dart';
+import 'package:loga/screens/change_font/widgets/switch_font_button.dart';
+
 import 'package:provider/src/provider.dart';
 
-class ChangeFont extends StatefulWidget {
-  ChangeFont({Key? key}) : super(key: key);
+class ChangeFontSizeScreen extends StatefulWidget {
+  ChangeFontSizeScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChangeFont> createState() => _ChangeFontState();
+  State<ChangeFontSizeScreen> createState() => _ChangeFontSizeScreenState();
 }
 
-class _ChangeFontState extends State<ChangeFont> {
+class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
   var _userDataStorage = Hive.box('user_data');
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,9 @@ class _ChangeFontState extends State<ChangeFont> {
               SwitchFontButton(
                 fontSize: 16,
                 method: () {
-                  context.read<ChangeFontLogic>().fontSize = 16;
+                  setState(() {
+                    context.read<ChangeFontLogic>().fontSize = 16;
+                  });
                 },
               ),
               SwitchFontButton(
@@ -111,15 +114,15 @@ class _ChangeFontState extends State<ChangeFont> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomFontNavigationButton(
+            FontNavigationButton(
               icon: Icons.arrow_back_ios_new,
               method: () => Navigator.pop(context),
             ),
-            CustomFontNavigationButton(
+            FontNavigationButton(
               icon: Icons.cancel_rounded,
               method: null,
             ),
-            CustomFontNavigationButton(
+            FontNavigationButton(
               icon: Icons.done,
               method: () {
                 context.read<ChangeFontLogic>().changeFontSize();

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:hive/hive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'dart:math' as math;
+import 'package:loga/screens/erase_data/widgets/remove_card.dart';
 
-import 'package:loda/Widgets/RemoveData/removeCard.dart';
-
-class RemoveData extends StatefulWidget {
-  const RemoveData({Key? key}) : super(key: key);
+class EraseDataScreen extends StatefulWidget {
+  const EraseDataScreen({Key? key}) : super(key: key);
 
   @override
-  State<RemoveData> createState() => _RemoveDataState();
+  State<EraseDataScreen> createState() => _EraseDataScreenState();
 }
 
-class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
+class _EraseDataScreenState extends State<EraseDataScreen>
+    with TickerProviderStateMixin {
   TextEditingController _passwordController = TextEditingController();
   bool _isClicked1 = false,
       _isClicked2 = false,
@@ -22,7 +20,6 @@ class _RemoveDataState extends State<RemoveData> with TickerProviderStateMixin {
       _applyValue = false;
   double _buttonOpacity = 0;
   double _fieldLeft = 900; // pixels? Bad idea
-  var _hiveStorage = Hive.box<dynamic>('user_data');
   String _errorHandler = '';
   @override
   void initState() {

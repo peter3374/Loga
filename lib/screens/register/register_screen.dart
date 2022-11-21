@@ -1,24 +1,22 @@
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loda/Pages/consolePage.dart';
+import 'package:loga/model/controllers/Register/nicknames.dart';
+import 'package:loga/screens/console/console_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:loda/Widgets/Register/textField.dart';
-import 'package:loda/model/Logic/Register/nicknames.dart';
+import 'package:loga/Widgets/Register/textField.dart';
 import 'package:parallax_rain/parallax_rain.dart';
 import 'package:random_string/random_string.dart';
 
-class Register extends StatefulWidget {
-  Register({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterScreenState extends State<RegisterScreen> {
   String _errorhandler = '';
   final _formKey = GlobalKey<FormState>();
 
@@ -38,7 +36,7 @@ class _RegisterState extends State<Register> {
         print('Username: ${_nicknameController.text}');
         print('Password: ${_passwordController.text}');
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => ConsolePage()),
+          MaterialPageRoute(builder: (context) => ConsoleScreen()),
         );
         return 'Saved data!';
       } else if (_nicknameController.text == '' &&

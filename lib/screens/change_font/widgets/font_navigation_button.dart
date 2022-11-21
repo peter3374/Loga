@@ -1,12 +1,13 @@
-
 import 'package:flutter/material.dart';
 
-class CustomFontNavigationButton extends StatelessWidget {
-  VoidCallback? method;
-  IconData icon;
-  CustomFontNavigationButton(
-      {Key? key, required this.icon, required this.method})
-      : super(key: key);
+class FontNavigationButton extends StatelessWidget {
+  final VoidCallback? method;
+  final IconData icon;
+  FontNavigationButton({
+    Key? key,
+    required this.icon,
+    required this.method,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

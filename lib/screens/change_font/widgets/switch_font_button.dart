@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SwitchFontButton extends StatelessWidget {
-  double fontSize;
-  VoidCallback? method;
-  SwitchFontButton({Key? key, required this.method, required this.fontSize})
-      : super(key: key);
+  final double fontSize;
+  final VoidCallback? method;
+  SwitchFontButton({
+    Key? key,
+    required this.method,
+    required this.fontSize,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +21,13 @@ class SwitchFontButton extends StatelessWidget {
           border: Border.all(color: Theme.of(context).primaryColor, width: 2.2),
         ),
         child: TextButton(
-            onPressed: method,
-            child: Text(
-              '$fontSize',
-              style: TextStyle(
-                  fontSize: fontSize, color: Theme.of(context).primaryColor),
-            )),
+          onPressed: method,
+          child: Text(
+            '$fontSize',
+            style: TextStyle(
+                fontSize: fontSize, color: Theme.of(context).primaryColor),
+          ),
+        ),
       ),
     );
   }

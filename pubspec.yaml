@@ -1,34 +1,30 @@
-name: loda
-description: A new Flutter project.
+name: loga
+description: day reporter
 
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.0.0+1
+version: 1.8.2+1
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-
-
-  # your packages:
-  sliding_up_panel: #down panel
-  hive_flutter: #save data #1
+  sliding_up_panel: 
+  hive_flutter: 
   hive:
-  intl: #date formatter 
+  intl:
   path_provider:
   provider:
-  parallax_rain: # effect on login page
-  shimmer: ^2.0.0 # for text animation (themes)
-  random_string: #password generator
-
-  url_launcher: #for url
-  localize_and_translate: ^4.1.1
+  parallax_rain: 
+  shimmer:
+  random_string: 
+  speech_to_text: ^6.0.0
+  url_launcher:
+  localize_and_translate:
 
 
 
