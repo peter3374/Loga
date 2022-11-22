@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-class SpeechLogic extends ChangeNotifier {
+class SpeechProvider extends ChangeNotifier {
   SpeechToText _speechToText = SpeechToText();
   get speechToTextGet => _speechToText;
 

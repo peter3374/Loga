@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:loga/database/scheme/db_scheme.dart';
 import 'package:loga/screens/register/controller/generated_nicknames.dart';
 import 'package:loga/screens/console/console_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,14 +26,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _nicknameStatus = false;
   bool _passwordStatus = false;
-
+  Box _userDataStorage = Hive.box(DbScheme.userData);
   String _verification() {
     if (_formKey.currentState!.validate()) {
       if (_nicknameController.text.length >= 2 &&
           _passwordController.text.length >= 7) {
-        Box username_box = Hive.box('user_data');
-        username_box.put('nickname', _nicknameController.text);
-        username_box.put('password', _passwordController.text);
+        _userDataStorage.put(DbScheme.nickname, _nicknameController.text);
+        _userDataStorage.put(DbScheme.password, _passwordController.text);
         print('Username: ${_nicknameController.text}');
         print('Password: ${_passwordController.text}');
         Navigator.of(context).push(

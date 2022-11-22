@@ -34,9 +34,9 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider(create: (context) => ThemeManager()),
           ChangeNotifierProvider(
-            create: (context) => ChangeFontLogic(),
+            create: (context) => ChangeFontController(),
           ),
-          ChangeNotifierProvider(create: (context) => SpeechLogic())
+          ChangeNotifierProvider(create: (context) => SpeechProvider())
         ],
         child: const MaterialAppTheme(),
       ),

@@ -18,14 +18,19 @@ class SwitchFontButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             12,
           ),
-          border: Border.all(color: Theme.of(context).primaryColor, width: 2.2),
+          border: Border.all(
+            color: Theme.of(context).primaryColor,
+            width: 2.2,
+          ),
         ),
         child: TextButton(
           onPressed: method,
           child: Text(
             '$fontSize',
             style: TextStyle(
-                fontSize: fontSize, color: Theme.of(context).primaryColor),
+              fontSize: fontSize,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         ),
       ),

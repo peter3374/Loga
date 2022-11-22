@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:loga/database/scheme/db_scheme.dart';
 import 'package:loga/database/todomodel.dart';
 import 'package:loga/screens/change_font/controller/change_font_controller.dart';
 import 'package:loga/screens/change_font/widgets/font_navigation_button.dart';
@@ -16,7 +17,8 @@ class ChangeFontSizeScreen extends StatefulWidget {
 }
 
 class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
-  var _userDataStorage = Hive.box('user_data');
+  final _userDataStorage = Hive.box(DbScheme.userData);
+  final _userReportsStorage = Hive.box<TodoModel>(DbScheme.userReports);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,33 +27,31 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
           height: MediaQuery.of(context).size.height * 0.70, // 86
           width: double.infinity,
           child: ValueListenableBuilder(
-              valueListenable: Hive.box<TodoModel>('user_reports').listenable(),
+              valueListenable: _userReportsStorage.listenable(),
               builder: (context, Box<TodoModel> box, _) {
-                if (box.values.isEmpty) {
-                  return Center(
-                      child: Text(
-                    'DefaultText'.tr(),
-                    style: TextStyle(
-                      fontSize: context.read<ChangeFontLogic>().fontSize,
-                    ),
-                  ));
-                } else {
-                  return ListView.builder(
-                      itemCount: box.length,
-                      shrinkWrap: true,
-                      itemBuilder: (
-                        context,
-                        index,
-                      ) {
-                        TodoModel? todo = box.getAt(index);
-                        return UserTasksFont(
-                          fontSize: context.watch<ChangeFontLogic>().fontSize,
-                          date: todo!.createdAt.toString(),
-                          text: todo.text,
-                          userName: _userDataStorage.get('nickname'),
-                        );
-                      });
-                }
+                return box.values.isEmpty
+                    ? Center(
+                        child: Text(
+                          'DefaultText'.tr(),
+                          style: TextStyle(
+                            fontSize:
+                                context.read<ChangeFontController>().fontSize,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: box.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          TodoModel? todo = box.getAt(index);
+                          return UserTasksFont(
+                            fontSize:
+                                context.watch<ChangeFontController>().fontSize,
+                            date: todo!.createdAt.toString(),
+                            text: todo.text,
+                            userName: _userDataStorage.get(DbScheme.nickname),
+                          );
+                        });
               }),
         ),
         // bottom
@@ -63,7 +63,7 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
                 fontSize: 12,
                 method: () {
                   setState(() {
-                    context.read<ChangeFontLogic>().fontSize = 12;
+                    context.read<ChangeFontController>().fontSize = 12;
                   });
                 },
               ),
@@ -71,7 +71,7 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
                 fontSize: 13,
                 method: () {
                   setState(() {
-                    context.read<ChangeFontLogic>().fontSize = 13;
+                    context.read<ChangeFontController>().fontSize = 13;
                   });
                 },
               ),
@@ -79,7 +79,7 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
                 fontSize: 14,
                 method: () {
                   setState(() {
-                    context.read<ChangeFontLogic>().fontSize = 14;
+                    context.read<ChangeFontController>().fontSize = 14;
                   });
                 },
               ),
@@ -87,7 +87,7 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
                 fontSize: 15,
                 method: () {
                   setState(() {
-                    context.read<ChangeFontLogic>().fontSize = 15;
+                    context.read<ChangeFontController>().fontSize = 15;
                   });
                 },
               ),
@@ -95,7 +95,7 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
                 fontSize: 16,
                 method: () {
                   setState(() {
-                    context.read<ChangeFontLogic>().fontSize = 16;
+                    context.read<ChangeFontController>().fontSize = 16;
                   });
                 },
               ),
@@ -103,7 +103,7 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
                 fontSize: 17,
                 method: () {
                   setState(() {
-                    context.read<ChangeFontLogic>().fontSize = 17;
+                    context.read<ChangeFontController>().fontSize = 17;
                   });
                 },
               ),
@@ -123,9 +123,8 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
             ),
             FontNavigationButton(
               icon: Icons.done,
-              method: () {
-                context.read<ChangeFontLogic>().changeFontSize();
-              },
+              method: () async =>
+                  await context.read<ChangeFontController>().changeFontSize(),
             ),
           ],
         )

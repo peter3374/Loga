@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hive/hive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:loga/database/scheme/db_scheme.dart';
 import 'package:loga/screens/erase_data/widgets/remove_card.dart';
 
 class EraseDataScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class EraseDataScreen extends StatefulWidget {
 
 class _EraseDataScreenState extends State<EraseDataScreen>
     with TickerProviderStateMixin {
+  final _userDataStorage = Hive.box(DbScheme.userData);
   TextEditingController _passwordController = TextEditingController();
   bool _isClicked1 = false,
       _isClicked2 = false,
@@ -24,7 +26,6 @@ class _EraseDataScreenState extends State<EraseDataScreen>
   @override
   void initState() {
     super.initState();
-    print('${Hive.box('user_data').get('password')}');
   }
 
   Future<void> _switchApplyValue(bool value) async {
@@ -161,7 +162,7 @@ class _EraseDataScreenState extends State<EraseDataScreen>
                           value: _applyValue,
                           onChanged: (bool? value) async {
                             if (_passwordController.text.compareTo(
-                                    Hive.box('user_data').get('password')) ==
+                                    _userDataStorage.get(DbScheme.password)) ==
                                 0) {
                               if (_isClicked1) {
                                 _errorHandler = 'Removed!';
@@ -181,7 +182,8 @@ class _EraseDataScreenState extends State<EraseDataScreen>
                             }
                           },
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                       ),
                       Text(
@@ -193,9 +195,12 @@ class _EraseDataScreenState extends State<EraseDataScreen>
                     ],
                   ),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                          width: 2, color: Theme.of(context).primaryColor)),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      width: 2,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -227,15 +232,18 @@ class _EraseDataScreenState extends State<EraseDataScreen>
                       Text(
                         'Back'.tr(),
                         style: TextStyle(
-                            color:
-                                Theme.of(context).textTheme.headline6!.color),
+                          color: Theme.of(context).textTheme.headline6!.color,
+                        ),
                       )
                     ],
                   ),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                          width: 2, color: Theme.of(context).primaryColor)),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      width: 2,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
                 ),
               ),
             ),

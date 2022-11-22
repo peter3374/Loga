@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:loga/database/scheme/db_scheme.dart';
 
-class ChangeFontLogic extends ChangeNotifier {
+class ChangeFontController extends ChangeNotifier {
   double fontSize = 12;
 
-  changeFontSize() {
-    Hive.box('user_data').put('currentFontSize', fontSize);
-    notifyListeners();
-  }
+  Future<void> changeFontSize() async =>
+      await Hive.box(DbScheme.userData).put(DbScheme.currentFontSize, fontSize);
 }

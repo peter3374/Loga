@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 abstract class CustomDialogsCollection {
-  static Future<void> noGoogleAppDialog(BuildContext context) {
-    return showDialog(
+  static Future<void> noGoogleAppDialog(BuildContext context) async {
+    return await showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -51,13 +51,16 @@ abstract class CustomDialogsCollection {
 
   static SnackBar showCustomSnackBar(String message) {
     return SnackBar(
-        content: Container(
-          child: Text(message),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(5), topLeft: Radius.circular(5)),
+      content: Container(
+        child: Text(message),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(5),
+            topLeft: Radius.circular(5),
           ),
         ),
-        duration: const Duration(seconds: 2));
+      ),
+      duration: const Duration(seconds: 2),
+    );
   }
 }

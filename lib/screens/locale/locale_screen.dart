@@ -28,7 +28,7 @@ class _LocaleScreenState extends State<LocaleScreen>
     _animationController.forward(); // run animation
   }
 
-  _animateButton() async {
+  Future<void> _animateButton() async {
     await Future.delayed(Duration(milliseconds: 600));
     setState(() {
       _buttonWidth = 100;
@@ -88,7 +88,7 @@ class _LocaleScreenState extends State<LocaleScreen>
                   text: 'Apply'.tr(),
                   height: _buttonHeight,
                   width: _buttonWidth,
-                  method: () {
+                  method: () async {
                     switch (clickedIndex) {
                       case 0:
                         translator.setNewLanguage(
@@ -149,33 +149,3 @@ class _LocaleScreenState extends State<LocaleScreen>
     ));
   }
 }
-
-// circle like in gta 5
-              // Container(
-              //   decoration: BoxDecoration(
-              //       shape: BoxShape.circle,
-              //       border: Border.all(color: Colors.white, width: 3)),
-              //   width: 300,
-              //   height: 300,
-              //   child: Stack(
-              //     children: [
-              //       Container(
-              //         decoration: BoxDecoration(
-              //             shape: BoxShape.circle,
-              //             color: Colors.white,
-              //             border: Border.all(color: Colors.white, width: 3)),
-              //         width: 70,
-              //         height: 70,
-              //       ),
-              //       Center(
-              //         child: Container(
-              //           decoration: BoxDecoration(
-              //               shape: BoxShape.circle,
-              //               border: Border.all(color: Colors.white, width: 3)),
-              //           width: 130,
-              //           height: 130,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
