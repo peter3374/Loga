@@ -14,6 +14,7 @@ import 'package:loga/screens/console/widgets/user_tasks_widget.dart';
 import 'package:loga/screens/locale/locale_screen.dart';
 import 'package:loga/screens/pick_theme/pick_theme_screen.dart';
 import 'package:loga/screens/erase_data/erase_data_screen.dart';
+import 'package:loga/themes/theme_manager.dart';
 import 'package:provider/src/provider.dart';
 
 class ConsoleScreen extends StatefulWidget {
@@ -123,7 +124,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                     topRight: Radius.circular(14),
                   ),
                   // TODO error here
-                  // color: context.watch<ThemeManager>().sheetColor,
+                   color: context.watch<ThemeManager>().sheetColor,
 
                   //
                   child: SingleChildScrollView(

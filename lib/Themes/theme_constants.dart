@@ -78,7 +78,7 @@ ThemeData darkMode = ThemeData(
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(foregroundColor: Colors.white),
     ),
-    brightness: Brightness.dark, // buttons color + scroll effect color
+  //  brightness: Brightness.dark, // buttons color + scroll effect color
     primaryColor: Colors.white, // appbar + textfield length
     buttonColor: Colors.white,
     dialogBackgroundColor: Colors.white, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black));
