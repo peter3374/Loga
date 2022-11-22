@@ -6,7 +6,7 @@ import 'package:loga/database/todomodel.dart';
 import 'package:loga/screens/change_font/controller/change_font_controller.dart';
 import 'package:loga/screens/change_font/widgets/font_navigation_button.dart';
 import 'package:loga/screens/change_font/widgets/switch_font_button.dart';
-import 'package:loga/screens/console/widgets/user_tasks_widget.dart';
+import 'package:loga/screens/change_font/widgets/user_tasks_font.dart';
 import 'package:provider/src/provider.dart';
 
 class ChangeFontSizeScreen extends StatefulWidget {

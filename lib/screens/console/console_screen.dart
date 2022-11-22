@@ -10,7 +10,7 @@ import 'package:loga/screens/change_font/controller/change_font_controller.dart'
 import 'package:loga/screens/console/controller/speech_provider.dart';
 import 'package:loga/screens/change_font/change_font.dart';
 import 'package:loga/screens/console/widgets/console_button.dart';
-import 'package:loga/screens/console/widgets/user_tasks_widget.dart';
+import 'package:loga/screens/console/widgets/user_message_widget.dart';
 import 'package:loga/screens/locale/locale_screen.dart';
 import 'package:loga/screens/pick_theme/pick_theme_screen.dart';
 import 'package:loga/screens/erase_data/erase_data_screen.dart';
@@ -57,12 +57,13 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     }
   }
 
-  addReport() async {
+  Future<void> addReport() async {
     if (_textEditingController.text.length >= 2) {
       await _userReportsStorage.add(TodoModel(
           createdAt: DateTime.now(), text: _textEditingController.text));
       print('saved!');
       _textEditingController.text = '';
+      FocusScope.of(context).unfocus();
     }
   }
 
@@ -98,10 +99,10 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           TodoModel? todo = box.getAt(index);
-                          return UserMessage(
+                          return UserMessageWidget(
                             fontSize:
                                 context.watch<ChangeFontController>().fontSize,
-                            date: todo!.createdAt.toString(),
+                            date: todo!.createdAt,
                             text: todo.text,
                             userName: _userDataStorage.get(DbScheme.nickname),
                           );
@@ -190,15 +191,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                                     ),
                                   ),
                                 ),
-                                Material(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                    onTap: () => addReport(),
-                                    splashColor: Theme.of(context).buttonColor,
-                                    child: Icon(
-                                      Icons.send,
-                                      color: Theme.of(context).buttonColor,
-                                    ),
+                                InkWell(
+                                  onTap: () => addReport(),
+                                  child: Icon(
+                                    Icons.send,
+                                    color: Theme.of(context).buttonColor,
                                   ),
                                 ),
                                 InkWell(
