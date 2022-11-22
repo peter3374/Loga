@@ -86,6 +86,8 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                         'EmptyList'.tr() + ' \😔',
                         style: TextStyle(
                           fontSize: 22,
+                          color: Theme.of(context).textTheme.headline6?.color ??
+                              Colors.white,
                         ),
                       ),
                     );
@@ -94,10 +96,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                         controller: _scrollConsoleController,
                         itemCount: box.length,
                         shrinkWrap: true,
-                        itemBuilder: (
-                          context,
-                          index,
-                        ) {
+                        itemBuilder: (context, index) {
                           TodoModel? todo = box.getAt(index);
                           return UserMessage(
                             fontSize:
@@ -124,7 +123,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                     topRight: Radius.circular(14),
                   ),
                   // TODO error here
-                   color: context.watch<ThemeManager>().sheetColor,
+                  color: context.watch<ThemeManager>().sheetColor,
 
                   //
                   child: SingleChildScrollView(
@@ -172,17 +171,22 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                                     controller: _textEditingController,
                                     autocorrect: true,
                                     cursorWidth: 8,
-                                    cursorColor: Theme.of(context).buttonColor,
+                                    cursorColor: Theme.of(context).primaryColor,
+                                    style: TextStyle(
+                                      color: Theme.of(context).hintColor,
+                                    ),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       prefixIconColor:
                                           Theme.of(context).primaryColor,
                                       hintText: 'DayExperience'.tr(),
                                       hintStyle: TextStyle(
-                                        color: Theme.of(context).buttonColor,
+                                        color: Theme.of(context).hintColor,
                                       ),
-                                      focusColor: Theme.of(context).buttonColor,
-                                      hoverColor: Theme.of(context).buttonColor,
+                                      focusColor:
+                                          Theme.of(context).primaryColor,
+                                      hoverColor:
+                                          Theme.of(context).primaryColor,
                                     ),
                                   ),
                                 ),

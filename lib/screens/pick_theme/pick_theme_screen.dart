@@ -4,7 +4,7 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/common_widgets/dialogs.dart';
 import 'package:loga/database/scheme/db_scheme.dart';
 import 'package:loga/screens/pick_theme/widgets/theme_card.dart';
-import 'package:loga/themes/themeVariables.dart';
+import 'package:loga/themes/theme_variables.dart';
 import 'package:loga/Themes/theme_constants.dart';
 import 'package:loga/Themes/theme_manager.dart';
 

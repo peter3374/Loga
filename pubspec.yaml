@@ -25,6 +25,7 @@ dependencies:
   speech_to_text: ^6.0.0
   url_launcher:
   localize_and_translate:
+  flutter_native_splash:
 
 
 
