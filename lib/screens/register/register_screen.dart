@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loga/model/controllers/Register/nicknames.dart';
+import 'package:loga/screens/register/controller/generated_nicknames.dart';
 import 'package:loga/screens/console/console_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -107,10 +107,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             state(() {
                               _nicknameStatus = value;
                               if (_nicknameStatus) {
-                                _nicknameController.text = GeneratedNicknames
-                                        .nickNames[
-                                    Random().nextInt(
-                                        GeneratedNicknames.nickNames.length)];
+                                _nicknameController.text =
+                                    GeneratedNicknames.nickNamesList[Random()
+                                        .nextInt(GeneratedNicknames
+                                            .nickNamesList.length)];
                               } else {
                                 _nicknameController.text = '';
                               }

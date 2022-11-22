@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/database/todomodel.dart';
-import 'package:loga/model/controllers/ChangeFont/changeFontLogic.dart';
+import 'package:loga/screens/change_font/controller/change_font_controller.dart';
 import 'package:loga/screens/change_font/widgets/font_navigation_button.dart';
 import 'package:loga/screens/change_font/widgets/switch_font_button.dart';
 import 'package:loga/screens/console/widgets/user_tasks_widget.dart';
