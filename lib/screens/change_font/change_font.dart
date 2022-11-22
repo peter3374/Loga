@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loga/Widgets/Console/userTasksWidget.dart';
+import 'package:loga/database/todomodel.dart';
 import 'package:loga/model/controllers/ChangeFont/changeFontLogic.dart';
-import 'package:loga/model/database/todomodel.dart';
 import 'package:loga/screens/change_font/widgets/font_navigation_button.dart';
 import 'package:loga/screens/change_font/widgets/switch_font_button.dart';
-
+import 'package:loga/screens/console/widgets/user_tasks_widget.dart';
 import 'package:provider/src/provider.dart';
 
 class ChangeFontSizeScreen extends StatefulWidget {
@@ -47,7 +46,7 @@ class _ChangeFontSizeScreenState extends State<ChangeFontSizeScreen> {
                         TodoModel? todo = box.getAt(index);
                         return UserTasksFont(
                           fontSize: context.watch<ChangeFontLogic>().fontSize,
-                          date: todo!.date.toString(),
+                          date: todo!.createdAt.toString(),
                           text: todo.text,
                           userName: _userDataStorage.get('nickname'),
                         );

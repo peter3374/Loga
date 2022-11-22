@@ -5,12 +5,12 @@ part 'todomodel.g.dart'; // for build runner
 @HiveType(typeId: 1)
 class TodoModel {
   @HiveField(0)
-  final date;
+  final DateTime createdAt;
   @HiveField(1)
-  final text;
+  final String text;
 
   TodoModel({
-    required this.date,
+    required this.createdAt,
     required this.text,
   });
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loga/Widgets/pick_theme/themeCard.dart';
+import 'package:loga/common_widgets/dialogs.dart';
+import 'package:loga/screens/pick_theme/widgets/theme_card.dart';
 import 'package:loga/themes/themeVariables.dart';
 import 'package:loga/Themes/theme_constants.dart';
 import 'package:loga/Themes/theme_manager.dart';
-import 'package:loga/Widgets/dialogs.dart';
 
 import 'package:provider/src/provider.dart';
 
@@ -51,7 +51,7 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(30.0),
-                child: MyThemeCard(
+                child: ThemeCard(
                   method: () {
                     // int selected = index;
                     switch (index) {

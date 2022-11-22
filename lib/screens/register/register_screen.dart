@@ -5,7 +5,7 @@ import 'package:loga/screens/console/console_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:loga/Widgets/Register/textField.dart';
+import 'package:loga/screens/register/widgets/text_field.dart';
 import 'package:parallax_rain/parallax_rain.dart';
 import 'package:random_string/random_string.dart';
 
@@ -76,12 +76,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _logo(),
-                  CustomTextField(
+                  RegisterTextField(
                     hintText: 'Nickname'.tr(),
                     textEditingController: _nicknameController,
                     maxLength: 20,
                   ),
-                  CustomTextField(
+                  RegisterTextField(
                     hintText: 'Password'.tr(),
                     textEditingController: _passwordController,
                     maxLength: 20,

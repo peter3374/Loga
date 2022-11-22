@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:loga/database/todomodel.dart';
 import 'package:loga/screens/console/console_screen.dart';
 import 'package:loga/screens/register/register_screen.dart';
 import 'package:loga/themes/theme_manager.dart';
 import 'package:loga/model/controllers/ChangeFont/changeFontLogic.dart';
 import 'package:loga/model/controllers/Console/speechLogic.dart';
 import 'package:loga/model/controllers/Register/getVisits.dart';
-import 'package:loga/model/database/todomodel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:provider/provider.dart';

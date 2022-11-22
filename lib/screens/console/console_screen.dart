@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:loga/database/todomodel.dart';
 import 'package:loga/model/controllers/ChangeFont/changeFontLogic.dart';
 import 'package:loga/model/controllers/Console/speechLogic.dart';
 import 'package:loga/screens/change_font/change_font.dart';
+import 'package:loga/screens/console/widgets/console_button.dart';
+import 'package:loga/screens/console/widgets/user_tasks_widget.dart';
 import 'package:loga/screens/locale/locale_screen.dart';
 import 'package:loga/screens/pick_theme/pick_theme_screen.dart';
 import 'package:loga/screens/erase_data/erase_data_screen.dart';
-import 'package:loga/Widgets/Console/consoleButton.dart';
-import 'package:loga/Widgets/Console/userTasksWidget.dart';
-import 'package:loga/model/database/todomodel.dart';
 import 'package:provider/src/provider.dart';
 
 class ConsoleScreen extends StatefulWidget {
@@ -30,15 +30,17 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     context.read<SpeechLogic>().initSpeech();
     context.read<ChangeFontLogic>().fontSize =
         Hive.box('user_data').get('currentFontSize');
-    _scrollConsoleToLast();
+    _scrollToLastElement();
   }
 
   @override
   void dispose() {
+    _textEditingController.dispose();
+    _scrollConsoleController.dispose();
     super.dispose();
   }
 
-  _scrollConsoleToLast() {
+  _scrollToLastElement() {
 //FIXED   ScrollController not attached to any scroll views.
     if (_scrollConsoleController.hasClients) {
       if (Hive.box<TodoModel>('user_reports').values.isEmpty) {
@@ -51,11 +53,10 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     }
   }
 
-  _saveData() async {
+  addReport() async {
     if (_textEditingController.text.length >= 2) {
       await Hive.box<TodoModel>('user_reports').add(TodoModel(
-          date: DateFormat('yMd').format(DateTime.now()).toString(),
-          text: _textEditingController.text));
+          createdAt: DateTime.now(), text: _textEditingController.text));
       print('saved!');
       _textEditingController.text = '';
     }
@@ -96,7 +97,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                           TodoModel? todo = box.getAt(index);
                           return UserMessage(
                             fontSize: context.watch<ChangeFontLogic>().fontSize,
-                            date: todo!.date.toString(),
+                            date: todo!.createdAt.toString(),
                             text: todo.text ?? "null",
                             userName:
                                 Hive.box('user_data').get('nickname') ?? "null",
@@ -181,7 +182,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                                 Material(
                                   color: Colors.transparent,
                                   child: InkWell(
-                                    onTap: () => _saveData(),
+                                    onTap: () => addReport(),
                                     splashColor: Theme.of(context).buttonColor,
                                     child: Icon(
                                       Icons.send,
