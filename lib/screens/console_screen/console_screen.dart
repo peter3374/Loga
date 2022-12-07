@@ -157,70 +157,63 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                                   Theme.of(context).textTheme.headline6!.color,
                               fontSize: 15),
                         ),
-                        StatefulBuilder(
-                          builder: (context, state) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                LimitedBox(
-                                  // maxWidth: MediaQuery.of(context).size.height * 0.1,
-                                  maxWidth: 250,
-                                  child: TextField(
-                                    maxLines: 1,
-                                    controller: _textEditingController,
-                                    autocorrect: true,
-                                    cursorWidth: 8,
-                                    cursorColor: Theme.of(context).primaryColor,
-                                    style: TextStyle(
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      prefixIconColor:
-                                          Theme.of(context).primaryColor,
-                                      hintText: 'DayExperience'.tr(),
-                                      hintStyle: TextStyle(
-                                        color: Theme.of(context).hintColor,
-                                      ),
-                                      focusColor:
-                                          Theme.of(context).primaryColor,
-                                      hoverColor:
-                                          Theme.of(context).primaryColor,
-                                    ),
-                                  ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            LimitedBox(
+                              // maxWidth: MediaQuery.of(context).size.height * 0.1,
+                              maxWidth: 250,
+                              child: TextField(
+                                maxLines: 1,
+                                controller: _textEditingController,
+                                autocorrect: true,
+                                cursorWidth: 8,
+                                cursorColor: Theme.of(context).primaryColor,
+                                style: TextStyle(
+                                  color: Theme.of(context).hintColor,
                                 ),
-                                InkWell(
-                                  onTap: () => addReport(),
-                                  child: Icon(
-                                    Icons.send,
-                                    color: Theme.of(context).buttonColor,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  prefixIconColor:
+                                      Theme.of(context).primaryColor,
+                                  hintText: 'DayExperience'.tr(),
+                                  hintStyle: TextStyle(
+                                    color: Theme.of(context).hintColor,
                                   ),
+                                  focusColor: Theme.of(context).primaryColor,
+                                  hoverColor: Theme.of(context).primaryColor,
                                 ),
-                                InkWell(
-                                  onTap: () => context
-                                          .read<SpeechProvider>()
-                                          .speechToTextGet
-                                          .isNotListening
-                                      ? context
-                                          .read<SpeechProvider>()
-                                          .startListening(
-                                              _textEditingController)
-                                      : context
-                                          .read<SpeechProvider>()
-                                          .stopListening(),
-                                  child: Icon(
-                                    context
-                                            .read<SpeechProvider>()
-                                            .speechToTextGet
-                                            .isNotListening
-                                        ? Icons.mic_none
-                                        : Icons.mic,
-                                    color: Theme.of(context).buttonColor,
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => addReport(),
+                              child: Icon(
+                                Icons.send,
+                                color: Theme.of(context).buttonColor,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => context
+                                      .read<SpeechProvider>()
+                                      .speechToTextGet
+                                      .isNotListening
+                                  ? context
+                                      .read<SpeechProvider>()
+                                      .startListening(_textEditingController)
+                                  : context
+                                      .read<SpeechProvider>()
+                                      .stopListening(),
+                              child: Icon(
+                                context
+                                        .read<SpeechProvider>()
+                                        .speechToTextGet
+                                        .isNotListening
+                                    ? Icons.mic_none
+                                    : Icons.mic,
+                                color: Theme.of(context).buttonColor,
+                              ),
+                            ),
+                          ],
                         ),
                         // buttons
                         Padding(
@@ -245,9 +238,10 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                                 leadingIcon: Icons.style,
                                 title: 'Themes'.tr(),
                                 onclick: () => Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            PickThemeScreen())),
+                                  MaterialPageRoute(
+                                    builder: (context) => PickThemeScreen(),
+                                  ),
+                                ),
                               ),
                               ConsoleButton(
                                 leadingIcon: Icons.format_size,
