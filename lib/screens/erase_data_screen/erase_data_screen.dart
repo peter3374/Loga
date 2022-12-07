@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/database/scheme/db_scheme.dart';
-import 'package:loga/screens/erase_data/widgets/remove_card.dart';
+import 'package:loga/screens/erase_data_screen/widgets/remove_card.dart';
 
 class EraseDataScreen extends StatefulWidget {
   const EraseDataScreen({Key? key}) : super(key: key);

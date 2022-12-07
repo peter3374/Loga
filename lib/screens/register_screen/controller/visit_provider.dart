@@ -6,7 +6,7 @@ class VisitProvider {
   static Future<bool> getUserVisits() async {
     if (Hive.box(DbScheme.userData).get(DbScheme.nickname) == null) {
       await Hive.box(DbScheme.userData)
-          .put(DbScheme.currentTheme, 'darkMode'); // set default theme
+          .put(DbScheme.currentTheme, DbScheme.darkMode); // set default theme
       await Hive.box(DbScheme.userData)
           .put(DbScheme.currentFontSize, 12.0); // set default font
       log('First Visit');

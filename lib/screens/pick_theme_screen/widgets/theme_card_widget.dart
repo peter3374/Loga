@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loga/screens/pick_theme/widgets/color_text_widget.dart';
+import 'package:loga/screens/pick_theme_screen/widgets/color_text_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ThemeCardWdiget extends StatelessWidget {

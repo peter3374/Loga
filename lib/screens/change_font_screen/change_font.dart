@@ -3,10 +3,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/database/scheme/db_scheme.dart';
 import 'package:loga/database/todomodel.dart';
-import 'package:loga/screens/change_font/controller/change_font_controller.dart';
-import 'package:loga/screens/change_font/widgets/font_navigation_button.dart';
-import 'package:loga/screens/change_font/widgets/switch_font_button.dart';
-import 'package:loga/screens/change_font/widgets/user_tasks_font.dart';
+import 'package:loga/screens/change_font_screen/controller/change_font_controller.dart';
+import 'package:loga/screens/change_font_screen/widgets/font_navigation_button.dart';
+import 'package:loga/screens/change_font_screen/widgets/switch_font_button.dart';
+import 'package:loga/screens/change_font_screen/widgets/user_tasks_font.dart';
 import 'package:provider/src/provider.dart';
 
 class ChangeFontSizeScreen extends StatefulWidget {

@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/database/scheme/db_scheme.dart';
-import 'package:loga/screens/register/controller/generated_nicknames.dart';
-import 'package:loga/screens/console/console_screen.dart';
+import 'package:loga/screens/register_screen/controller/generated_nicknames.dart';
+import 'package:loga/screens/console_screen/console_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:loga/screens/register/widgets/text_field.dart';
+import 'package:loga/screens/register_screen/widgets/text_field.dart';
 import 'package:parallax_rain/parallax_rain.dart';
 import 'package:random_string/random_string.dart';
 

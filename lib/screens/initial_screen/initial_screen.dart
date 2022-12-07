@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
-import 'package:loga/screens/change_font/controller/change_font_controller.dart';
-import 'package:loga/screens/console/console_screen.dart';
-import 'package:loga/screens/console/controller/speech_provider.dart';
-import 'package:loga/screens/register/controller/visit_provider.dart';
-import 'package:loga/screens/register/register_screen.dart';
+import 'package:loga/screens/change_font_screen/controller/change_font_controller.dart';
+import 'package:loga/screens/console_screen/console_screen.dart';
+import 'package:loga/screens/console_screen/controller/speech_provider.dart';
+import 'package:loga/screens/register_screen/controller/visit_provider.dart';
+import 'package:loga/screens/register_screen/register_screen.dart';
 import 'package:loga/themes/theme_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -22,13 +21,13 @@ class MyHomePage extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SpeechProvider())
       ],
       child: Consumer<ThemeManager>(
-        builder: (context, ThemeManager themeProvider, _) => MaterialApp(
+        builder: (__, ThemeManager themeProvider, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Loga',
-          theme: themeProvider.themeData,
+          theme: themeProvider.currentTheme,
           home: FutureBuilder(
             future: VisitProvider.getUserVisits(),
-            builder: (context, isFirstVisit) {
+            builder: (_, isFirstVisit) {
               return isFirstVisit.data == true
                   ? RegisterScreen()
                   : ConsoleScreen();

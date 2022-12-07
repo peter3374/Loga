@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loga/screens/locale/widgets/confirm_button_locale.dart';
-import 'package:loga/screens/locale/widgets/pick_locale_button.dart';
+import 'package:loga/screens/locale_screen/widgets/confirm_button_locale.dart';
+import 'package:loga/screens/locale_screen/widgets/pick_locale_button.dart';
 
 class LocaleScreen extends StatefulWidget {
   LocaleScreen({Key? key}) : super(key: key);
