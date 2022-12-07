@@ -16,16 +16,18 @@ class _EraseDataScreenState extends State<EraseDataScreen>
     with TickerProviderStateMixin {
   final _userDataStorage = Hive.box(DbScheme.userData);
   TextEditingController _passwordController = TextEditingController();
-  bool _isClicked1 = false,
+  bool isRemoveAllData = false,
       _isClicked2 = false,
       _isVisiblePassword = false,
       _applyValue = false;
   double _buttonOpacity = 0;
   double _fieldLeft = 900; // pixels? Bad idea
   String _errorHandler = '';
+
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
   }
 
   Future<void> _switchApplyValue(bool value) async {
@@ -41,18 +43,18 @@ class _EraseDataScreenState extends State<EraseDataScreen>
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               RemoveCard(
                 text: "RemoveAll".tr(),
-                isClicked: _isClicked1,
+                isClicked: isRemoveAllData,
                 method: () {
                   setState(() {
-                    _isClicked1 = !_isClicked1;
-                    if (_isClicked1) {
+                    isRemoveAllData = !isRemoveAllData;
+                    if (isRemoveAllData) {
                       _isClicked2 = false;
                       _fieldLeft = 0;
                       _buttonOpacity = 1;
@@ -74,7 +76,7 @@ class _EraseDataScreenState extends State<EraseDataScreen>
                   setState(() {
                     _isClicked2 = !_isClicked2;
                     if (_isClicked2) {
-                      _isClicked1 = false;
+                      isRemoveAllData = false;
                       _fieldLeft = 0;
                       _buttonOpacity = 1;
                     } else {
@@ -164,7 +166,7 @@ class _EraseDataScreenState extends State<EraseDataScreen>
                             if (_passwordController.text.compareTo(
                                     _userDataStorage.get(DbScheme.password)) ==
                                 0) {
-                              if (_isClicked1) {
+                              if (isRemoveAllData) {
                                 _errorHandler = 'Removed!';
                                 //  Hive.deleteFromDisk();
                               }

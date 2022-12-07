@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loga/screens/change_font_screen/controller/change_font_controller.dart';
 import 'package:loga/screens/console_screen/console_screen.dart';
-import 'package:loga/screens/console_screen/controller/speech_provider.dart';
+import 'package:loga/screens/console_screen/controller/console_screen_controller.dart';
+import 'package:loga/screens/console_screen/providers/speech_provider.dart';
 import 'package:loga/screens/register_screen/controller/visit_provider.dart';
 import 'package:loga/screens/register_screen/register_screen.dart';
 import 'package:loga/themes/theme_manager.dart';
@@ -18,7 +19,8 @@ class MyHomePage extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ChangeFontController(),
         ),
-        ChangeNotifierProvider(create: (context) => SpeechProvider())
+        ChangeNotifierProvider(create: (context) => SpeechProvider()),
+        ChangeNotifierProvider(create: (context) => ConsoleScreenController()),
       ],
       child: Consumer<ThemeManager>(
         builder: (__, ThemeManager themeProvider, _) => MaterialApp(
