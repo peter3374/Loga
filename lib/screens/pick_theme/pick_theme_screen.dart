@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/common_widgets/dialogs.dart';
 import 'package:loga/database/scheme/db_scheme.dart';
-import 'package:loga/screens/pick_theme/widgets/theme_card.dart';
+import 'package:loga/screens/pick_theme/widgets/theme_card_widget.dart';
 import 'package:loga/themes/theme_variables.dart';
 import 'package:loga/Themes/theme_constants.dart';
 import 'package:loga/Themes/theme_manager.dart';
@@ -15,7 +15,7 @@ class PickThemeScreen extends StatefulWidget {
   _PickThemeScreenState createState() => _PickThemeScreenState();
 }
 
-// Save theme only if it paid; Toll themes can apply but save! Just for demo
+// TODO Save theme only if it paid; Toll themes can apply but save! Just for demo
 class _PickThemeScreenState extends State<PickThemeScreen> {
   static List<String> _buttonTitles = [
     '0.99 USD',
@@ -53,8 +53,8 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
           itemCount: _buttonTitles.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: ThemeCard(
+              padding: const EdgeInsets.all(8.0),
+              child: ThemeCardWdiget(
                 method: () {
                   // int selected = index;
                   switch (index) {
@@ -125,9 +125,9 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
                 buttonTitle: _buttonTitles[index],
                 shimmerBase: ThemeVariables.shimmerBase[index],
                 shimmerHightlight: ThemeVariables.shimmerHightlight[index],
-                color1: ThemeVariables.firstColors[index],
-                color2: ThemeVariables.secondColors[index],
-                color3: ThemeVariables.thirdColors[index],
+                mainColor: ThemeVariables.firstColors[index],
+                backgroundColor: ThemeVariables.secondColors[index],
+                bottomSheetColor: ThemeVariables.thirdColors[index],
                 imgCodeName: ThemeVariables.imgCodeName[index],
                 title: ThemeVariables.titles[index],
               ),

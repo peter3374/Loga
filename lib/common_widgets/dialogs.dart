@@ -16,13 +16,16 @@ abstract class CustomDialogsCollection {
                   Column(
                     children: [
                       IconButton(
-                          iconSize: 30,
-                          icon: const Icon(
-                            Icons.store,
-                            color: Colors.green,
-                          ),
-                          onPressed: () => launch(
-                              'https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox&hl=ru&gl=US')),
+                        iconSize: 30,
+                        icon: const Icon(
+                          Icons.store,
+                          color: Colors.green,
+                        ),
+                        onPressed: () => launchUrl(
+                          Uri.parse(
+                              'https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox&hl=ru&gl=US'),
+                        ),
+                      ),
                       const Text('Download')
                     ],
                   ),

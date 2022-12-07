@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -141,11 +140,10 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                             width: 40,
                             height: 4,
                             decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .color,
-                                borderRadius: BorderRadius.circular(10)),
+                              color:
+                                  Theme.of(context).textTheme.headline6!.color,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
                         Text(
