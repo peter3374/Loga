@@ -4,7 +4,7 @@ import 'package:loga/themes/theme_helper.dart';
 class ThemeManager extends ChangeNotifier {
   // default is dark mode
   ThemeData? themeData = ThemeHelper.getCurrentTheme();
-  get getThemeData => themeData;
+
 
   Color sheetColor = ThemeHelper.getBottomSheetColor();
 
@@ -12,7 +12,6 @@ class ThemeManager extends ChangeNotifier {
     themeData = data;
     final res = ThemeHelper.getBottomSheetColor();
     print(res);
-    print(res.runtimeType);
     notifyListeners();
   }
 

@@ -1,20 +1,17 @@
 import 'dart:developer';
-
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:loga/database/scheme/db_scheme.dart';
 
-class FirstVisitProvider {
+class VisitProvider {
   static Future<bool> getUserVisits() async {
-    if (Hive.box('user_data').get('nickname') == null) {
-      await Hive.box('user_data')
-          .put('currentTheme', 'darkMode'); // set default theme
-      await Hive.box('user_data')
-          .put('currentFontSize', 12.0); // set default font
+    if (Hive.box(DbScheme.userData).get(DbScheme.nickname) == null) {
+      await Hive.box(DbScheme.userData)
+          .put(DbScheme.currentTheme, 'darkMode'); // set default theme
+      await Hive.box(DbScheme.userData)
+          .put(DbScheme.currentFontSize, 12.0); // set default font
       log('First Visit');
       return true;
     } else {
-      log('current font size: ${Hive.box('user_data').get(
-        'currentFontSize',
-      )}');
       return false;
     }
   }
