@@ -26,7 +26,7 @@ class ConfirmButtonLocale extends StatelessWidget {
           height: height,
 
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: Theme.of(context).primaryColor,
               width: 2,
