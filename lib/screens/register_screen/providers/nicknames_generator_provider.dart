@@ -1,5 +1,7 @@
-abstract class GeneratedNicknames {
-  static const List<String> nickNamesList = [
+import 'dart:math';
+
+class NicknamesGeneratorProvider {
+  final List<String> _nickNamesList = [
     'bsod',
     'kalich',
     'kale',
@@ -63,4 +65,6 @@ abstract class GeneratedNicknames {
     'xdot',
     'x_x',
   ];
+  String getRandomNickname() =>
+      _nickNamesList[Random().nextInt(_nickNamesList.length)];
 }

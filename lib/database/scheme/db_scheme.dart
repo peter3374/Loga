@@ -2,6 +2,7 @@ class DbScheme {
   static const userData = 'user_data'; // some data like themes, password
   static const userReports = 'user_reports'; // only reports
   static const currentFontSize = 'currentFontSize';
+  static const createdAt = 'createdAt';
   static const nickname = 'nickname';
   static const password = 'password';
   static const currentTheme = 'currentTheme';

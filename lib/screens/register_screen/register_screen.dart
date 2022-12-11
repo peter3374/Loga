@@ -1,14 +1,10 @@
-import 'dart:math';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:loga/database/scheme/db_scheme.dart';
-import 'package:loga/screens/register_screen/controller/generated_nicknames.dart';
-import 'package:loga/screens/console_screen/console_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:loga/screens/register_screen/widgets/text_field.dart';
+import 'package:loga/screens/register_screen/controller/register_controller.dart';
+import 'package:loga/screens/register_screen/widgets/register_text_field_widget.dart';
 import 'package:parallax_rain/parallax_rain.dart';
-import 'package:random_string/random_string.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -18,45 +14,20 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  String _errorhandler = '';
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController _nicknameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
-  bool _nicknameStatus = false;
-  bool _passwordStatus = false;
-  Box _userDataStorage = Hive.box(DbScheme.userData);
-  String _verification() {
-    if (_formKey.currentState!.validate()) {
-      if (_nicknameController.text.length >= 2 &&
-          _passwordController.text.length >= 7) {
-        _userDataStorage.put(DbScheme.nickname, _nicknameController.text);
-        _userDataStorage.put(DbScheme.password, _passwordController.text);
-        print('Username: ${_nicknameController.text}');
-        print('Password: ${_passwordController.text}');
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => ConsoleScreen()),
-        );
-        return 'Saved data!';
-      } else if (_nicknameController.text == '' &&
-          _passwordController.text == '') {
-        return 'Fields cant be empty.';
-      } else if (_nicknameController.text == '') {
-        return 'Nickname cant be empty.';
-      } else if (_passwordController.text == '') {
-        return 'Password cant be empty.';
-      } else if (_nicknameController.text.length <= 2) {
-        return 'Too short nickname. Nickname must be >2 symbols.';
-      } else if (_passwordController.text.length <= 8) {
-        return 'Too short password. Password must be >10 symbols.';
-      }
-    }
-    return '.';
+  @override
+  void dispose() {
+    _nicknameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final registerController = Provider.of<RegisterScreenController>(context);
     return Scaffold(
       body: SizedBox(
         height: double.infinity,
@@ -75,20 +46,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _logo(),
-                  RegisterTextField(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 50),
+                    child: Column(
+                      children: [
+                        Image.asset('assets/logo.png'),
+                        const Text(
+                          'Your awesome\nday logger',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  RegisterTextFieldWidget(
                     hintText: 'Nickname'.tr(),
+                    formValidationProvider:
+                        registerController.registerFormValidationProvider,
+                    isNicknameValidation: true,
                     textEditingController: _nicknameController,
-                    maxLength: 20,
+                    maxTextLength: 20,
                   ),
-                  RegisterTextField(
+                  RegisterTextFieldWidget(
                     hintText: 'Password'.tr(),
+                    formValidationProvider:
+                        registerController.registerFormValidationProvider,
+                    isNicknameValidation: false,
                     textEditingController: _passwordController,
-                    maxLength: 20,
-                  ),
-                  Text(
-                    _errorhandler,
-                    style: TextStyle(color: Colors.red),
+                    maxTextLength: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -99,43 +87,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      StatefulBuilder(builder: (context, state) {
-                        return CupertinoSwitch(
-                          thumbColor: Theme.of(context).scaffoldBackgroundColor,
-                          value: _nicknameStatus,
-                          onChanged: (value) {
-                            state(() {
-                              _nicknameStatus = value;
-                              if (_nicknameStatus) {
-                                _nicknameController.text =
-                                    GeneratedNicknames.nickNamesList[Random()
-                                        .nextInt(GeneratedNicknames
-                                            .nickNamesList.length)];
-                              } else {
-                                _nicknameController.text = '';
-                              }
-                            });
-                          },
-                          activeColor: Colors.white,
-                        );
-                      }),
-                      // CupertinoSwitch(
-                      //   thumbColor: Theme.of(context).scaffoldBackgroundColor,
-                      //   value: _nicknameStatus,
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       _nicknameStatus = value;
-                      //       if (_nicknameStatus) {
-                      //         _nicknameController.text =
-                      //             GeneratedNicknames.nickNames[Random().nextInt(
-                      //                 GeneratedNicknames.nickNames.length)];
-                      //       } else {
-                      //         _nicknameController.text = '';
-                      //       }
-                      //     });
-                      //   },
-                      //   activeColor: Colors.white,
-                      // ),
+                      CupertinoSwitch(
+                        value: registerController.isRandomNickname,
+                        onChanged: (value) {
+                          registerController.switchNicknameValue(value);
+                          _nicknameController.text =
+                              registerController.generateNickname();
+                        },
+                        thumbColor: Theme.of(context).primaryColor,
+                        trackColor: Colors.grey.withOpacity(0.3),
+                      ),
                     ],
                   ),
                   Row(
@@ -147,32 +108,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      StatefulBuilder(builder: (context, state) {
-                        return CupertinoSwitch(
-                          value: _passwordStatus,
-                          onChanged: (value) {
-                            state(() {
-                              _passwordStatus = value;
-                              if (_passwordStatus) {
-                                _passwordController.text = randomString(8);
-                              } else {
-                                _passwordController.text = '';
-                              }
-                            });
-                          },
-                          thumbColor: Theme.of(context).scaffoldBackgroundColor,
-                          activeColor: Colors.white,
-                        );
-                      }),
+                      CupertinoSwitch(
+                        value: registerController.isRandomPassword,
+                        onChanged: (value) {
+                          registerController.switchPasswordValue(value);
+                          _passwordController.text =
+                              registerController.generatePassword();
+                        },
+                        thumbColor: Theme.of(context).primaryColor,
+                        trackColor: Colors.grey.withOpacity(0.3),
+                      ),
                     ],
                   ),
-                  // enter
                   TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _errorhandler = _verification();
-                      });
-                    },
+                    onPressed: () async => await registerController.signUp(
+                      formKey: _formKey,
+                      context: context,
+                      nickname: _nicknameController.text,
+                      password: _passwordController.text,
+                    ),
                     child: Text(
                       'Enter'.tr(),
                       style: TextStyle(fontSize: 22),
@@ -182,25 +136,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
           ),
-          // decoration: BoxDecoration(
-          //     image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(''))),
         ),
       ),
     );
   }
-}
-
-Widget _logo() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 50),
-    child: Column(
-      children: [
-        Image.asset('assets/logo.png'),
-        const Text(
-          'Your awesome\n        day logger',
-          style: TextStyle(color: Colors.white, fontSize: 25),
-        ),
-      ],
-    ),
-  );
 }
