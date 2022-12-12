@@ -28,10 +28,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final registerController = Provider.of<RegisterScreenController>(context);
+    final primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       body: SizedBox(
-        height: double.infinity,
         width: double.infinity,
+        height: double.infinity,
         child: ParallaxRain(
           dropFallSpeed: 1.60,
           dropHeight: 10,
@@ -50,13 +51,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     child: Column(
                       children: [
-                        Image.asset('assets/logo.png'),
-                        const Text(
-                          'Your awesome\nday logger',
+                        Text(
+                          'Loga',
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontSize: 50,
+                          ),
+                        ),
+                        Text(
+                          'Your awesome\ndaily logger',
                           textAlign: TextAlign.right,
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
+                            color: primaryColor,
+                            fontSize: 20,
                           ),
                         ),
                       ],
@@ -84,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         'GenerateNickname'.tr(),
                         style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: primaryColor,
                         ),
                       ),
                       CupertinoSwitch(
@@ -94,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           _nicknameController.text =
                               registerController.generateNickname();
                         },
-                        thumbColor: Theme.of(context).primaryColor,
+                        thumbColor: primaryColor,
                         trackColor: Colors.grey.withOpacity(0.3),
                       ),
                     ],
@@ -105,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         'GeneratePassword'.tr(),
                         style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: primaryColor,
                         ),
                       ),
                       CupertinoSwitch(
@@ -115,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           _passwordController.text =
                               registerController.generatePassword();
                         },
-                        thumbColor: Theme.of(context).primaryColor,
+                        thumbColor: primaryColor,
                         trackColor: Colors.grey.withOpacity(0.3),
                       ),
                     ],
@@ -129,7 +136,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     child: Text(
                       'Enter'.tr(),
-                      style: TextStyle(fontSize: 22),
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: primaryColor,
+                      ),
                     ),
                   ),
                 ],

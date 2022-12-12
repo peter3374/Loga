@@ -73,9 +73,6 @@ class ThemeCardWdiget extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: method,
                       child: Text(buttonTitle),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                      ),
                     ),
                   ),
                 ],

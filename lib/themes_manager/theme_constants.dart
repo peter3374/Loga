@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // pay
 ThemeData darkGreenMode = ThemeData(
-  appBarTheme: const AppBarTheme(color: Colors.green),
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.green),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.green,
   textTheme: const TextTheme(
@@ -17,11 +17,16 @@ ThemeData darkGreenMode = ThemeData(
     buttonColor: Colors.green,
   ),
   dialogBackgroundColor: Colors.green,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.green,
+    ),
+  ),
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.green),
 );
 // pay
 ThemeData darkRedMode = ThemeData(
-  appBarTheme: const AppBarTheme(color: Colors.red),
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.red),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.red,
   textTheme: const TextTheme(
@@ -36,13 +41,18 @@ ThemeData darkRedMode = ThemeData(
   buttonTheme: ButtonThemeData(
     buttonColor: Colors.red,
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.red,
+    ),
+  ),
   dialogBackgroundColor: Colors.red,
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.red),
 );
 
 // pay
 ThemeData darkPinkMode = ThemeData(
-  appBarTheme: const AppBarTheme(color: Colors.pink),
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.pink),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.pink,
   textTheme: const TextTheme(
@@ -57,12 +67,17 @@ ThemeData darkPinkMode = ThemeData(
   buttonTheme: ButtonThemeData(
     buttonColor: Colors.pink,
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.pink,
+    ),
+  ),
   dialogBackgroundColor: Colors.pink,
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
 );
 
 ThemeData darkOrangeMode = ThemeData(
-  appBarTheme: const AppBarTheme(color: Colors.deepOrangeAccent),
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.deepOrangeAccent),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.deepOrangeAccent,
   textTheme: const TextTheme(
@@ -76,6 +91,12 @@ ThemeData darkOrangeMode = ThemeData(
   buttonTheme: ButtonThemeData(
     buttonColor: Colors.deepOrangeAccent,
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.deepOrangeAccent,
+    ),
+  ),
+
   dialogBackgroundColor: Colors.deepOrangeAccent,
   colorScheme:
       ColorScheme.fromSwatch().copyWith(secondary: Colors.deepOrangeAccent),
@@ -83,22 +104,24 @@ ThemeData darkOrangeMode = ThemeData(
 
 // middle day default theme
 ThemeData darkMode = ThemeData(
-  appBarTheme: const AppBarTheme(color: Colors.black),
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.white,
   textTheme: TextTheme(
     headline5: TextStyle(color: Colors.white),
     headline6: TextStyle(color: Colors.white),
   ),
-  
-  textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(foregroundColor: Colors.white),
+
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.black,
+    ),
   ),
 
   primaryColor: Colors.white, // appbar + textfield length
 
   buttonTheme: ButtonThemeData(
-    buttonColor: Colors.white,
+    buttonColor: Colors.black,
   ),
   dialogBackgroundColor: Colors.white,
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
@@ -120,8 +143,14 @@ ThemeData lightMode = ThemeData(
   ),
   primaryColor: Colors.black, // appbar + textfield length
 
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.white,
+    ),
+  ),
+
   buttonTheme: ButtonThemeData(
-    buttonColor: Colors.black,
+    buttonColor: Colors.white,
   ),
   dialogBackgroundColor: Colors.black,
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),

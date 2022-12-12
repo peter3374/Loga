@@ -28,10 +28,9 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<ThemeProvider>(context, listen: false);
+    final themeManager = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         toolbarHeight: 70,
         centerTitle: true,
@@ -57,18 +56,18 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
                 method: () async {
                   switch (index) {
                     case 0:
-                      CustomDialogsCollection.showCustomSnackBar(
-                        'Demo',
-                        context,
+                      CustomDialogsCollection.displaySnackbar(
+                        message: 'Demo',
+                        context: context,
                       );
                       print('green');
                       themeManager.setThemeData(darkGreenMode);
 
                       break;
                     case 1:
-                      CustomDialogsCollection.showCustomSnackBar(
-                        'Demo',
-                        context,
+                      CustomDialogsCollection.displaySnackbar(
+                        message: 'Demo',
+                        context: context,
                       );
 
                       context.read<ThemeProvider>().setThemeData(darkRedMode);
@@ -86,9 +85,9 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
 
                       break;
                     case 3:
-                      CustomDialogsCollection.showCustomSnackBar(
-                        'Demo',
-                        context,
+                      CustomDialogsCollection.displaySnackbar(
+                        message: 'Demo',
+                        context: context,
                       );
 
                       context.read<ThemeProvider>().setThemeData(darkPinkMode);

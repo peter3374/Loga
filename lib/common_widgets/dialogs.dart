@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-abstract class CustomDialogsCollection {
+class CustomDialogsCollection {
+  static const _googleServiceLink =
+      'https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox&hl=ru&gl=US';
   static Future<void> noGoogleAppDialog(BuildContext context) async {
     return await showDialog(
         context: context,
@@ -21,9 +23,8 @@ abstract class CustomDialogsCollection {
                           Icons.store,
                           color: Colors.green,
                         ),
-                        onPressed: () => launchUrl(
-                          Uri.parse(
-                              'https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox&hl=ru&gl=US'),
+                        onPressed: () async => await launchUrl(
+                          Uri.parse(_googleServiceLink),
                         ),
                       ),
                       const Text('Download')
@@ -33,17 +34,16 @@ abstract class CustomDialogsCollection {
                   Column(
                     children: [
                       IconButton(
-                          iconSize: 30,
-                          icon: const Icon(
-                            Icons.warning,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            showCustomSnackBar(
-                              'try restart app, or reboot your phone',
-                              context,
-                            );
-                          }),
+                        iconSize: 30,
+                        icon: const Icon(
+                          Icons.warning,
+                          color: Colors.red,
+                        ),
+                        onPressed: () => displaySnackbar(
+                          message: 'try restart app, or reboot your phone',
+                          context: context,
+                        ),
+                      ),
                       const Text('I am still got error!'),
                     ],
                   ),
@@ -54,22 +54,34 @@ abstract class CustomDialogsCollection {
         });
   }
 
-  static Future<void> showCustomSnackBar(
-      String message, BuildContext context) async {
-    await ScaffoldMessenger.of(context).showSnackBar(
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+      displaySnackbar({
+    required BuildContext context,
+    required String message,
+    int milliseconds = 2000,
+  }) {
+    FocusScope.of(context).unfocus();
+    return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: SnackBar(
-          content: Container(
-            child: Text(message),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
-              ),
+        padding: const EdgeInsets.only(bottom: 600),
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: Container(
+          width: double.infinity,
+          height: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.black.withOpacity(0.8),
+          ),
+          child: Center(
+            child: Text(
+              message,
+              maxLines: null,
             ),
           ),
-          duration: const Duration(seconds: 2),
         ),
+        duration: Duration(milliseconds: milliseconds),
       ),
     );
   }
