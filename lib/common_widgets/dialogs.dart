@@ -40,7 +40,9 @@ abstract class CustomDialogsCollection {
                           ),
                           onPressed: () {
                             showCustomSnackBar(
-                                'try restart app, or reboot your phone');
+                              'try restart app, or reboot your phone',
+                              context,
+                            );
                           }),
                       const Text('I am still got error!'),
                     ],
@@ -52,18 +54,23 @@ abstract class CustomDialogsCollection {
         });
   }
 
-  static SnackBar showCustomSnackBar(String message) {
-    return SnackBar(
-      content: Container(
-        child: Text(message),
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(5),
-            topLeft: Radius.circular(5),
+  static Future<void> showCustomSnackBar(
+      String message, BuildContext context) async {
+    await ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: SnackBar(
+          content: Container(
+            child: Text(message),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(5),
+                topLeft: Radius.circular(5),
+              ),
+            ),
           ),
+          duration: const Duration(seconds: 2),
         ),
       ),
-      duration: const Duration(seconds: 2),
     );
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ConsoleButton extends StatelessWidget {
+class OptionsButton extends StatelessWidget {
   final VoidCallback? onclick;
   final IconData? leadingIcon;
   final Color? color;
   final String? title;
 
-  ConsoleButton({
+  OptionsButton({
     Key? key,
     this.onclick,
     this.leadingIcon,
@@ -20,26 +20,33 @@ class ConsoleButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Column(
         children: [
-          InkWell(
-            splashColor: Theme.of(context).buttonColor,
-            onTap: onclick,
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Icon(
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: onclick,
+                  child: Icon(
                     leadingIcon,
-                    color: Theme.of(context).buttonColor,
+                    color: Theme.of(context).primaryColor,
                     size: 30,
                   ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadius.circular(12),
-              ),
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).primaryColor,
+                  spreadRadius: 0.6,
+                  blurRadius: 2,
+                ),
+              ],
             ),
           ),
+          const SizedBox(height: 7.0),
           FittedBox(
             child: Text(
               title!,
@@ -49,7 +56,7 @@ class ConsoleButton extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

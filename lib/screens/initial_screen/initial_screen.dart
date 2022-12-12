@@ -9,7 +9,7 @@ import 'package:loga/screens/register_screen/providers/password_generator_provid
 import 'package:loga/screens/register_screen/providers/register_form_validation_provider.dart';
 import 'package:loga/screens/register_screen/providers/visit_provider.dart';
 import 'package:loga/screens/register_screen/register_screen.dart';
-import 'package:loga/themes/theme_manager.dart';
+import 'package:loga/themes_manager/theme_manager.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -19,7 +19,9 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ThemeManager()),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
         ChangeNotifierProvider(
           create: (context) => ChangeFontController(),
         ),
@@ -33,8 +35,8 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ],
-      child: Consumer<ThemeManager>(
-        builder: (__, ThemeManager themeProvider, _) => MaterialApp(
+      child: Consumer<ThemeProvider>(
+        builder: (__, ThemeProvider themeProvider, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Loga',
           theme: themeProvider.currentTheme,

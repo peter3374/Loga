@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/screens/change_font_screen/change_font.dart';
-import 'package:loga/screens/console_screen/widgets/console_button.dart';
+import 'package:loga/screens/console_screen/widgets/options_button.dart';
 import 'package:loga/screens/erase_data_screen/erase_data_screen.dart';
 import 'package:loga/screens/locale_screen/locale_screen.dart';
 import 'package:loga/screens/pick_theme_screen/pick_theme_screen.dart';
+import 'package:loga/themes_manager/theme_manager.dart';
+import 'package:provider/provider.dart';
 
 class OptionsButtonWidget extends StatelessWidget {
   const OptionsButtonWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<ThemeProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Wrap(
@@ -24,13 +27,13 @@ class OptionsButtonWidget extends StatelessWidget {
           //   title: 'User',
           //   onclick: () => null,
           // ),
-          ConsoleButton(
+          OptionsButton(
             leadingIcon: Icons.grid_4x4_outlined,
             title: 'GridView'.tr(),
             onclick: () => null,
           ),
 
-          ConsoleButton(
+          OptionsButton(
             leadingIcon: Icons.style,
             title: 'Themes'.tr(),
             onclick: () => Navigator.of(context).push(
@@ -39,7 +42,7 @@ class OptionsButtonWidget extends StatelessWidget {
               ),
             ),
           ),
-          ConsoleButton(
+          OptionsButton(
             leadingIcon: Icons.format_size,
             title: 'FontSize'.tr(),
             onclick: () => Navigator.of(context).push(
@@ -53,12 +56,12 @@ class OptionsButtonWidget extends StatelessWidget {
           //   title: 'Stats',
           //   onclick: () => null,
           // ),
-          ConsoleButton(
+          OptionsButton(
             leadingIcon: Icons.star,
             title: 'RateApp'.tr(),
             onclick: () => null,
           ),
-          ConsoleButton(
+          OptionsButton(
               leadingIcon: Icons.delete,
               title: 'EraseData'.tr(),
               onclick: () {
@@ -68,7 +71,7 @@ class OptionsButtonWidget extends StatelessWidget {
                   ),
                 );
               }),
-          ConsoleButton(
+          OptionsButton(
             leadingIcon: Icons.translate,
             title: 'Lang'.tr(),
             onclick: () => Navigator.of(context).push(
@@ -77,7 +80,7 @@ class OptionsButtonWidget extends StatelessWidget {
               ),
             ),
           ),
-          ConsoleButton(
+          OptionsButton(
             leadingIcon: Icons.power_settings_new,
             title: 'Exit'.tr(),
             onclick: () async => await SystemNavigator.pop(),

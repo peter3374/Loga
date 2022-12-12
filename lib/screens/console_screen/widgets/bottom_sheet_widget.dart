@@ -3,7 +3,6 @@ import 'package:loga/screens/console_screen/controller/console_screen_controller
 import 'package:loga/screens/console_screen/widgets/field_options_widget.dart';
 import 'package:loga/screens/console_screen/widgets/options_buttons_widget.dart';
 import 'package:loga/screens/console_screen/widgets/top_banner_widget.dart';
-import 'package:loga/themes/theme_manager.dart';
 import 'package:provider/provider.dart';
 
 class BottomSheetWidget extends StatelessWidget {
@@ -19,9 +18,9 @@ class BottomSheetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
         expand: true,
-        initialChildSize: 0.14,
-        minChildSize: 0.14,
-        maxChildSize: 0.5,
+        initialChildSize: 0.12,
+        minChildSize: 0.12,
+        maxChildSize: 0.45,
         builder: (BuildContext context, ScrollController controller) {
           return Material(
             borderRadius: const BorderRadius.only(
@@ -29,9 +28,8 @@ class BottomSheetWidget extends StatelessWidget {
               topRight: Radius.circular(14),
             ),
             // TODO error here
-            color: context.watch<ThemeManager>().sheetColor,
-
-            //
+            // color: context.watch<ThemeManager>().sheetColor,
+            color: Colors.black,
             child: SingleChildScrollView(
               // physics: PageScrollPhysics(),
               controller: controller,

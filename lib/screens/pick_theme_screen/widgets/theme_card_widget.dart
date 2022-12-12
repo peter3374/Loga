@@ -4,22 +4,19 @@ import 'package:shimmer/shimmer.dart';
 
 class ThemeCardWdiget extends StatelessWidget {
   final VoidCallback? method;
-  final shimmerBase,
-      shimmerHightlight,
-      mainColor,
-      backgroundColor,
-      bottomSheetColor,
-      buttonTitle;
-
-  final String title, imgCodeName;
-
+  final Color shimmerBase;
+  final Color shimmerHightlight;
+  final Color mainColor;
+  final Color backgroundColor;
+  final String buttonTitle;
+  final String title;
+  final String imgCodeName;
   const ThemeCardWdiget({
     Key? key,
     required this.buttonTitle,
     @required this.method,
     required this.mainColor,
     required this.backgroundColor,
-    required this.bottomSheetColor,
     required this.title,
     required this.imgCodeName,
     required this.shimmerHightlight,
@@ -71,17 +68,14 @@ class ThemeCardWdiget extends StatelessWidget {
                     shapeColor: backgroundColor,
                     text: 'Background color',
                   ),
-                  ColorTextWidget(
-                    shapeColor: bottomSheetColor,
-                    text: 'BottomSheet color',
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 70),
                     child: ElevatedButton(
                       onPressed: method,
                       child: Text(buttonTitle),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green),
+                        backgroundColor: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ],

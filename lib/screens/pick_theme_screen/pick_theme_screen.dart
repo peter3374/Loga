@@ -4,10 +4,9 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/common_widgets/dialogs.dart';
 import 'package:loga/database/scheme/db_scheme.dart';
 import 'package:loga/screens/pick_theme_screen/widgets/theme_card_widget.dart';
-import 'package:loga/themes/theme_variables.dart';
-import 'package:loga/Themes/theme_constants.dart';
-import 'package:loga/Themes/theme_manager.dart';
-
+import 'package:loga/themes_manager/theme_constants.dart';
+import 'package:loga/themes_manager/theme_manager.dart';
+import 'package:loga/themes_manager/theme_variables.dart';
 import 'package:provider/src/provider.dart';
 
 class PickThemeScreen extends StatefulWidget {
@@ -29,9 +28,10 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<ThemeProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         toolbarHeight: 70,
         centerTitle: true,
@@ -40,7 +40,6 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
           width: double.infinity,
           height: 70,
           decoration: BoxDecoration(
-            color: Theme.of(context).appBarTheme.backgroundColor,
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(12),
               bottomRight: Radius.circular(12),
@@ -55,69 +54,60 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ThemeCardWdiget(
-                method: () {
-                  // int selected = index;
+                method: () async {
                   switch (index) {
                     case 0:
-                      CustomDialogsCollection.showCustomSnackBar('Demo');
+                      CustomDialogsCollection.showCustomSnackBar(
+                        'Demo',
+                        context,
+                      );
                       print('green');
-                      context.read<ThemeManager>().setThemeData(darkGreenMode);
-
-                      // sheet
-                      context.read<ThemeManager>().sheetColor =
-                          Color(0xFF001414);
+                      themeManager.setThemeData(darkGreenMode);
 
                       break;
                     case 1:
-                      CustomDialogsCollection.showCustomSnackBar('Demo');
-                      print('red');
-                      context.read<ThemeManager>().setThemeData(darkRedMode);
-                      // sheet
-                      context.read<ThemeManager>().sheetColor =
-                          Color(0xFF140202);
+                      CustomDialogsCollection.showCustomSnackBar(
+                        'Demo',
+                        context,
+                      );
+
+                      context.read<ThemeProvider>().setThemeData(darkRedMode);
+
                       // save
                       // _hiveStorage.put('currentTheme', 'darkRedMode');
                       break;
                     case 2:
-                      print('fruit');
-                      context.read<ThemeManager>().setThemeData(darkOrangeMode);
-                      // sheet
-                      context.read<ThemeManager>().sheetColor =
-                          Color(0xFF532809);
-                      // save
-                      _userDataStorage.put(
+                      context
+                          .read<ThemeProvider>()
+                          .setThemeData(darkOrangeMode);
+
+                      await _userDataStorage.put(
                           DbScheme.currentTheme, darkOrangeMode);
 
                       break;
                     case 3:
-                      CustomDialogsCollection.showCustomSnackBar('Demo');
+                      CustomDialogsCollection.showCustomSnackBar(
+                        'Demo',
+                        context,
+                      );
 
-                      context.read<ThemeManager>().setThemeData(darkPinkMode);
-                      // sheet
-                      context.read<ThemeManager>().sheetColor =
-                          Color(0xFF33021D);
+                      context.read<ThemeProvider>().setThemeData(darkPinkMode);
 
-                      print('pink');
                       //save theme
-                      //  _hiveStorage.put('currentTheme', 'darkPinkMode');
+                      //  await    _userDataStorage.put('currentTheme', 'darkPinkMode');
                       break;
                     case 4:
-                      print('power light');
-                      context.read<ThemeManager>().setThemeData(lightMode);
-                      // sheet
-                      context.read<ThemeManager>().sheetColor =
-                          Color(0xFF06BFBF);
+                      context.read<ThemeProvider>().setThemeData(lightMode);
+
                       //save theme
                       _userDataStorage.put(
                           DbScheme.currentTheme, DbScheme.lightMode);
                       break;
 
                     case 5:
-                      print('Dark mode');
-                      context.read<ThemeManager>().setThemeData(darkMode);
-                      // sheet
-                      context.read<ThemeManager>().sheetColor = Colors.black;
-                      _userDataStorage.put(
+                      context.read<ThemeProvider>().setThemeData(darkMode);
+
+                      await _userDataStorage.put(
                           DbScheme.currentTheme, DbScheme.darkMode);
                       break;
                   }
@@ -127,7 +117,6 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
                 shimmerHightlight: ThemeVariables.shimmerHightlight[index],
                 mainColor: ThemeVariables.firstColors[index],
                 backgroundColor: ThemeVariables.secondColors[index],
-                bottomSheetColor: ThemeVariables.thirdColors[index],
                 imgCodeName: ThemeVariables.imgCodeName[index],
                 title: ThemeVariables.titles[index],
               ),

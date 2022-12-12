@@ -22,7 +22,7 @@ abstract class ThemeVariables {
     'Beast mode',
     'Fruit ninja',
     'Electo girl',
-    'Power light',
+    'Sky',
     'Middle day',
   ];
   static const List<String> imgCodeName = [
@@ -48,13 +48,5 @@ abstract class ThemeVariables {
     Colors.black,
     Colors.white,
     Colors.black,
-  ];
-  static const List<Color> thirdColors = [
-    Color(0xFF001414),
-    Color(0xFF140202),
-    Color(0xFF532809),
-    Color(0xFF33021D),
-    Color(0xFF06BFBF),
-    Color(0xFF181818)
   ];
 }
