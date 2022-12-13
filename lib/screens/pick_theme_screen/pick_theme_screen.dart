@@ -32,9 +32,16 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        toolbarHeight: 70,
+        toolbarHeight: 60,
         centerTitle: true,
         title: Text('Themes'.tr()),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Theme.of(context).primaryColor,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         flexibleSpace: Container(
           width: double.infinity,
           height: 70,
@@ -49,12 +56,12 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: ListView.builder(
           itemCount: _buttonTitles.length,
-          itemBuilder: (context, index) {
+          itemBuilder: (context, i) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ThemeCardWdiget(
                 method: () async {
-                  switch (index) {
+                  switch (i) {
                     case 0:
                       CustomDialogsCollection.displaySnackbar(
                         message: 'Demo',
@@ -111,13 +118,13 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
                       break;
                   }
                 },
-                buttonTitle: _buttonTitles[index],
-                shimmerBase: ThemeVariables.shimmerBase[index],
-                shimmerHightlight: ThemeVariables.shimmerHightlight[index],
-                mainColor: ThemeVariables.firstColors[index],
-                backgroundColor: ThemeVariables.secondColors[index],
-                imgCodeName: ThemeVariables.imgCodeName[index],
-                title: ThemeVariables.titles[index],
+                buttonTitle: _buttonTitles[i],
+                shimmerBase: ThemeVariables.shimmerBase[i],
+                shimmerHightlight: ThemeVariables.shimmerHightlight[i],
+                mainColor: ThemeVariables.firstColors[i],
+                backgroundColor: ThemeVariables.secondColors[i],
+                imgCodeName: ThemeVariables.imgCodeName[i],
+                title: ThemeVariables.titles[i],
               ),
             );
           }),

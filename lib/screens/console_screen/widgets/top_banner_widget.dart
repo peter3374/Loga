@@ -29,6 +29,7 @@ class TopBannerWidget extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).textTheme.headline6!.color,
             fontSize: 15,
+            fontWeight: FontWeight.w300,
           ),
         ),
       ],

@@ -72,7 +72,10 @@ class ThemeCardWdiget extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 70),
                     child: ElevatedButton(
                       onPressed: method,
-                      child: Text(buttonTitle),
+                      child: Text(
+                        buttonTitle,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
                     ),
                   ),
                 ],

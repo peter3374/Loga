@@ -27,11 +27,8 @@ class BottomSheetWidget extends StatelessWidget {
               topLeft: Radius.circular(14),
               topRight: Radius.circular(14),
             ),
-            // TODO error here
-            // color: context.watch<ThemeManager>().sheetColor,
             color: Colors.black,
             child: SingleChildScrollView(
-              // physics: PageScrollPhysics(),
               controller: controller,
               child: Column(
                 children: [

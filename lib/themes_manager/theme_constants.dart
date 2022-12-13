@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // pay
 ThemeData darkGreenMode = ThemeData(
+  useMaterial3: true,
   appBarTheme: const AppBarTheme(backgroundColor: Colors.green),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.green,
@@ -26,6 +27,7 @@ ThemeData darkGreenMode = ThemeData(
 );
 // pay
 ThemeData darkRedMode = ThemeData(
+  useMaterial3: true,
   appBarTheme: const AppBarTheme(backgroundColor: Colors.red),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.red,
@@ -52,6 +54,7 @@ ThemeData darkRedMode = ThemeData(
 
 // pay
 ThemeData darkPinkMode = ThemeData(
+  useMaterial3: true,
   appBarTheme: const AppBarTheme(backgroundColor: Colors.pink),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.pink,
@@ -77,6 +80,7 @@ ThemeData darkPinkMode = ThemeData(
 );
 
 ThemeData darkOrangeMode = ThemeData(
+  useMaterial3: true,
   appBarTheme: const AppBarTheme(backgroundColor: Colors.deepOrangeAccent),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.deepOrangeAccent,
@@ -103,31 +107,41 @@ ThemeData darkOrangeMode = ThemeData(
 );
 
 // middle day default theme
+
+// TODO stable
 ThemeData darkMode = ThemeData(
-  appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
+  useMaterial3: true,
+  appBarTheme: AppBarTheme(
+    iconTheme: IconThemeData(color: Colors.red),
+    color: Colors.black,
+    titleTextStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+    ),
+  ),
   scaffoldBackgroundColor: Colors.black,
   hintColor: Colors.white,
   textTheme: TextTheme(
     headline5: TextStyle(color: Colors.white),
     headline6: TextStyle(color: Colors.white),
+    subtitle1: TextStyle(color: Colors.white),
   ),
-
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.black,
     ),
   ),
-
-  primaryColor: Colors.white, // appbar + textfield length
-
+  primaryColor: Colors.white,
   buttonTheme: ButtonThemeData(
     buttonColor: Colors.black,
   ),
   dialogBackgroundColor: Colors.white,
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
 );
+
 // power light
 ThemeData lightMode = ThemeData(
+  useMaterial3: true,
   switchTheme: SwitchThemeData(
     thumbColor: MaterialStateProperty.all<Color>(Colors.black),
   ),

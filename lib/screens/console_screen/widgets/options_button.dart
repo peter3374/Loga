@@ -40,7 +40,7 @@ class OptionsButton extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Theme.of(context).primaryColor,
-                  spreadRadius: 0.6,
+                  spreadRadius: 0.2,
                   blurRadius: 2,
                 ),
               ],

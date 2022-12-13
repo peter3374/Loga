@@ -37,10 +37,11 @@ class MyHomePage extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
         builder: (__, ThemeProvider themeProvider, _) => MaterialApp(
+        
           debugShowCheckedModeBanner: false,
           title: 'Loga',
           theme: themeProvider.currentTheme,
-          home: FutureBuilder(
+          home: FutureBuilder<bool>(
             future: AuthProvider.isUserRegistrated(),
             builder: (_, isUserRegistrated) {
               return isUserRegistrated.data == true
