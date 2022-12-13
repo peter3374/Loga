@@ -33,19 +33,15 @@ class PickLocaleButton extends StatelessWidget {
                   height: 40,
                 ),
               ),
-              // Icon(
-              //   leadingIcon,
-              //   color: Theme.of(context).primaryColor,
-              //   size: 35,
-              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Text(
                   title ?? 'null',
                   style: TextStyle(
-                      fontSize: 25,
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w300),
+                    fontSize: 25,
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
               ),
             ],

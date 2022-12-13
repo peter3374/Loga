@@ -12,6 +12,7 @@ class LocaleScreen extends StatefulWidget {
 
 class _LocaleScreenState extends State<LocaleScreen>
     with TickerProviderStateMixin {
+  // TODO create controller
   late AnimationController _animationController;
   late Animation<double> _animation;
   bool _isClicked = false;
