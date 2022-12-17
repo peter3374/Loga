@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loga/screens/pick_theme_screen/widgets/color_text_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ThemeCardWdiget extends StatelessWidget {
+class ThemeCardWidget extends StatelessWidget {
   final VoidCallback? method;
   final Color shimmerBase;
   final Color shimmerHightlight;
@@ -11,7 +11,7 @@ class ThemeCardWdiget extends StatelessWidget {
   final String buttonTitle;
   final String title;
   final String imgCodeName;
-  const ThemeCardWdiget({
+  const ThemeCardWidget({
     Key? key,
     required this.buttonTitle,
     @required this.method,
@@ -27,8 +27,8 @@ class ThemeCardWdiget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF011D1F),
-        borderRadius: BorderRadius.circular(8),
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Column(
         children: [
@@ -74,7 +74,9 @@ class ThemeCardWdiget extends StatelessWidget {
                       onPressed: method,
                       child: Text(
                         buttonTitle,
-                        style: TextStyle(color: Theme.of(context).primaryColor),
+                        style: TextStyle(
+                          color: Theme.of(context).appBarTheme.iconTheme?.color,
+                        ),
                       ),
                     ),
                   ),

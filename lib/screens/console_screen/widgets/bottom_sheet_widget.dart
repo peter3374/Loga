@@ -3,7 +3,6 @@ import 'package:loga/screens/console_screen/controller/console_screen_controller
 import 'package:loga/screens/console_screen/widgets/field_options_widget.dart';
 import 'package:loga/screens/console_screen/widgets/options_buttons_widget.dart';
 import 'package:loga/screens/console_screen/widgets/top_banner_widget.dart';
-import 'package:provider/provider.dart';
 
 class BottomSheetWidget extends StatelessWidget {
   final ConsoleScreenController consoleController;
@@ -29,6 +28,7 @@ class BottomSheetWidget extends StatelessWidget {
             ),
             color: Colors.black,
             child: SingleChildScrollView(
+              physics: const PageScrollPhysics(),
               controller: controller,
               child: Column(
                 children: [

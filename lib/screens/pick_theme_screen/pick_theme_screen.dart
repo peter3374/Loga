@@ -38,7 +38,7 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).appBarTheme.iconTheme?.color,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
@@ -59,7 +59,7 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
           itemBuilder: (context, i) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ThemeCardWdiget(
+              child: ThemeCardWidget(
                 method: () async {
                   switch (i) {
                     case 0:

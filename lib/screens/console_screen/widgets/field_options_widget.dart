@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:loga/screens/console_screen/controller/console_screen_controller.dart';
 import 'package:loga/screens/console_screen/providers/speech_provider.dart';
