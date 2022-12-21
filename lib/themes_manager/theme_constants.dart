@@ -117,7 +117,7 @@ final darkPinkMode = ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(foregroundColor: Colors.pink),
   ),
-  primaryColor: Colors.white,
+  primaryColor: Colors.pink,
   buttonTheme: ButtonThemeData(
     buttonColor: Colors.pink,
   ),
@@ -130,39 +130,36 @@ final darkPinkMode = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
 );
 
-final lightMode = ThemeData(
+final yellowMode = ThemeData( 
   useMaterial3: true,
   appBarTheme: AppBarTheme(
-    iconTheme: IconThemeData(color: Colors.white),
-    color: Colors.cyan,
+    iconTheme: IconThemeData(color: Colors.black),
+    color: Colors.yellow,
     titleTextStyle: TextStyle(
-      color: Colors.white,
+      color: Colors.black,
       fontSize: 20,
     ),
   ),
-  switchTheme: SwitchThemeData(
-    thumbColor: MaterialStateProperty.all<Color>(Colors.black),
-  ),
-  scaffoldBackgroundColor: Colors.white,
-  hintColor: Colors.black,
+  scaffoldBackgroundColor: Colors.black,
+  hintColor: Colors.yellow,
   textTheme: const TextTheme(
-    headline5: TextStyle(color: Colors.white),
-    headline6: TextStyle(color: Colors.black),
+    headline5: TextStyle(color: Colors.yellow),
+    headline6: TextStyle(color: Colors.yellow),
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(foregroundColor: Colors.black),
   ),
-  primaryColor: Colors.black,
+  primaryColor: Colors.yellow,
+  buttonTheme: ButtonThemeData(
+    buttonColor: Colors.yellow,
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.yellow,
     ),
   ),
-  buttonTheme: ButtonThemeData(
-    buttonColor: Colors.white,
-  ),
-  dialogBackgroundColor: Colors.black,
-  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
+  dialogBackgroundColor: Colors.yellow,
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.yellow),
 );
 
 final darkMode = ThemeData(

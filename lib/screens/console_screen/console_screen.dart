@@ -44,46 +44,50 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.85, // 86
-            width: double.infinity,
-            child: ValueListenableBuilder(
-                valueListenable:
-                    _consoleController.userReportsStorage.listenable(),
-                builder: (context, Box<TodoModel> box, _) {
-                  return box.values.isEmpty
-                      ? Center(
-                          child: Text(
-                            'EmptyList'.tr() + ' \😔',
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      ?.color ??
-                                  Colors.white,
+          GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.85, // 86
+              width: double.infinity,
+              child: ValueListenableBuilder(
+                  valueListenable:
+                      _consoleController.userReportsStorage.listenable(),
+                  builder: (context, Box<TodoModel> box, _) {
+                    return box.values.isEmpty
+                        ? Center(
+                            child: Text(
+                              'EmptyList'.tr() + ' \😔',
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        ?.color ??
+                                    Colors.white,
+                              ),
                             ),
-                          ),
-                        )
-                      : ListView.builder(
-                          controller: _scrollConsoleController,
-                          itemCount: box.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, i) {
-                            TodoModel? todo = box.getAt(i);
-                            return UserMessageWidget(
-                              fontSize: context
-                                  .watch<ChangeFontController>()
-                                  .fontSize,
-                              date: todo!.createdAt,
-                              text: todo.text,
-                              userName: _consoleController.userDataStorage
-                                  .get(DbScheme.nickname),
-                            );
-                          });
-                }),
+                          )
+                        : ListView.builder(
+                            controller: _scrollConsoleController,
+                            itemCount: box.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) {
+                              TodoModel? todo = box.getAt(i);
+                              return UserMessageWidget(
+                                fontSize: context
+                                    .watch<ChangeFontController>()
+                                    .fontSize,
+                                createdAt: todo!.createdAt,
+                                text: todo.text,
+                                userName: _consoleController.userDataStorage
+                                    .get(DbScheme.nickname),
+                              );
+                            });
+                  }),
+            ),
           ),
           BottomSheetWidget(
+            scrollController: _scrollConsoleController,
             consoleController: _consoleController,
             textEditingController: _textEditingController,
           )

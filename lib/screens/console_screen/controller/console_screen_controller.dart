@@ -8,20 +8,16 @@ class ConsoleScreenController extends ChangeNotifier {
   final userReportsStorage = Hive.box<TodoModel>(DbScheme.userReports);
 
   void scrollToLastElement(ScrollController scrollController) {
-    if (scrollController.hasClients) {
-      if (userReportsStorage.values.isEmpty) {
-        print('dont scrooll');
-      } else if (userReportsStorage.values.isNotEmpty) {
-        scrollController.jumpTo(scrollController.position.maxScrollExtent);
-        print('can scroll');
-      }
+    if (scrollController.hasClients && userReportsStorage.values.isNotEmpty) {
+      scrollController.jumpTo(scrollController.position.maxScrollExtent);
     }
   }
 
-  Future<void> addReport(
-    TextEditingController textEditingController,
-    BuildContext context,
-  ) async {
+  Future<void> addNote({
+    required TextEditingController textEditingController,
+    required ScrollController scrollController,
+    required BuildContext context,
+  }) async {
     if (textEditingController.text.length >= 2) {
       await userReportsStorage.add(
         TodoModel(
@@ -29,6 +25,7 @@ class ConsoleScreenController extends ChangeNotifier {
           text: textEditingController.text,
         ),
       );
+      scrollToLastElement(scrollController);
       print('saved!');
       textEditingController.clear();
       FocusScope.of(context).unfocus();

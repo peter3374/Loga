@@ -30,9 +30,6 @@ class ThemeProvider extends ChangeNotifier {
       case 'darkOrangeMode':
         print(_currentTheme);
         return darkOrangeMode;
-      case 'lightMode':
-        print(_currentTheme);
-        return lightMode;
       default:
         print(_currentTheme);
         return darkMode;

@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 
 class FieldOptionsWidget extends StatelessWidget {
   final ConsoleScreenController consoleController;
+  final ScrollController scrollController;
   final TextEditingController textEditingController;
   const FieldOptionsWidget({
     Key? key,
     required this.consoleController,
     required this.textEditingController,
+    required this.scrollController,
   }) : super(key: key);
 
   @override
@@ -41,9 +43,10 @@ class FieldOptionsWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => consoleController.addReport(
-            textEditingController,
-            context,
+          onTap: () => consoleController.addNote(
+            context: context,
+            scrollController: scrollController,
+            textEditingController: textEditingController,
           ),
           child: Icon(
             Icons.send,

@@ -6,7 +6,7 @@ import 'package:loga/database/scheme/db_scheme.dart';
 import 'package:loga/screens/pick_theme_screen/widgets/theme_card_widget.dart';
 import 'package:loga/themes_manager/theme_constants.dart';
 import 'package:loga/themes_manager/theme_manager.dart';
-import 'package:loga/themes_manager/theme_variables.dart';
+import 'package:loga/themes_manager/theme_constants_provider.dart';
 import 'package:provider/src/provider.dart';
 
 class PickThemeScreen extends StatefulWidget {
@@ -14,15 +14,14 @@ class PickThemeScreen extends StatefulWidget {
   _PickThemeScreenState createState() => _PickThemeScreenState();
 }
 
-// TODO Save theme only if it paid; Toll themes can apply but save! Just for demo
 class _PickThemeScreenState extends State<PickThemeScreen> {
   static List<String> _buttonTitles = [
-    '0.99 USD',
-    '0.99 USD',
+    '1.99 USD',
+    '1.99 USD',
     'Apply',
-    '0.99 USD',
-    'Apply',
-    'Default'
+    '1.29 USD',
+    'Free',
+    'Free',
   ];
   final _userDataStorage = Hive.box(DbScheme.userData);
 
@@ -103,13 +102,11 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
                       //  await    _userDataStorage.put('currentTheme', 'darkPinkMode');
                       break;
                     case 4:
-                      context.read<ThemeProvider>().setThemeData(lightMode);
+                      context.read<ThemeProvider>().setThemeData(yellowMode);
 
-                      //save theme
-                      _userDataStorage.put(
-                          DbScheme.currentTheme, DbScheme.lightMode);
+                      // await _userDataStorage.put(
+                      //     DbScheme.currentTheme, DbScheme.darkMode);
                       break;
-
                     case 5:
                       context.read<ThemeProvider>().setThemeData(darkMode);
 
@@ -119,12 +116,12 @@ class _PickThemeScreenState extends State<PickThemeScreen> {
                   }
                 },
                 buttonTitle: _buttonTitles[i],
-                shimmerBase: ThemeVariables.shimmerBase[i],
-                shimmerHightlight: ThemeVariables.shimmerHightlight[i],
-                mainColor: ThemeVariables.firstColors[i],
-                backgroundColor: ThemeVariables.secondColors[i],
-                imgCodeName: ThemeVariables.imgCodeName[i],
-                title: ThemeVariables.titles[i],
+                shimmerBase: ThemeConstantsProvider.shimmerBase[i],
+                shimmerHightlight: ThemeConstantsProvider.shimmerHightlight[i],
+                mainColor: ThemeConstantsProvider.primaryColor[i],
+                backgroundColor: Colors.black,
+                imgCodeName: ThemeConstantsProvider.imgCodeName[i],
+                title: ThemeConstantsProvider.themeTitles[i],
               ),
             );
           }),

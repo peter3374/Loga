@@ -3,14 +3,14 @@ import 'package:intl/intl.dart';
 
 class UserMessageWidget extends StatelessWidget {
   final double fontSize;
-  final DateTime date;
+  final DateTime createdAt;
   final String userName;
   final String text;
 
   UserMessageWidget({
     Key? key,
     this.fontSize = 12,
-    required this.date,
+    required this.createdAt,
     required this.text,
     required this.userName,
   }) : super(key: key);
@@ -22,7 +22,7 @@ class UserMessageWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Text(
-            DateFormat.yMd().add_jm().format(date),
+            DateFormat.yMd().add_jm().format(createdAt),
             style:
                 TextStyle(color: Theme.of(context).textTheme.headline6!.color),
           ),
@@ -43,9 +43,8 @@ class UserMessageWidget extends StatelessWidget {
               ),
             ),
             Flexible(
-              child: Text(
+              child: SelectableText(
                 text,
-                overflow: TextOverflow.fade,
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Theme.of(context).textTheme.headline6!.color,

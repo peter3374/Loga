@@ -7,10 +7,12 @@ import 'package:loga/screens/console_screen/widgets/top_banner_widget.dart';
 class BottomSheetWidget extends StatelessWidget {
   final ConsoleScreenController consoleController;
   final TextEditingController textEditingController;
+  final ScrollController scrollController;
   const BottomSheetWidget({
     Key? key,
     required this.consoleController,
     required this.textEditingController,
+    required this.scrollController,
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class BottomSheetWidget extends StatelessWidget {
                 children: [
                   TopBannerWidget(),
                   FieldOptionsWidget(
+                    scrollController: scrollController,
                     consoleController: consoleController,
                     textEditingController: textEditingController,
                   ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-abstract class ThemeVariables {
+class ThemeConstantsProvider {
   static const List<Color> shimmerBase = [
     Colors.green,
     Colors.red,
     Colors.orange,
     Colors.pink,
-    Colors.white,
+    Colors.yellow,
     Colors.white
   ];
   static const List<Color> shimmerHightlight = [
@@ -14,39 +14,31 @@ abstract class ThemeVariables {
     Color(0xFFBA0909),
     Colors.deepOrange,
     Colors.deepPurpleAccent,
-    Colors.cyan,
+    Colors.white,
     Colors.black,
   ];
-  static const List<String> titles = [
-    'Hacker mode',
-    'Beast mode',
-    'Fruit ninja',
-    'Electo girl',
-    'Sky',
-    'Middle day',
+  static const List<String> themeTitles = [
+    'Hacker',
+    'Beast',
+    'Juicy',
+    'Shuffle',
+    'Sun strike',
+    'Nixx',
   ];
   static const List<String> imgCodeName = [
     'green',
     'red',
     'orange',
     'pink',
-    'light',
+    'pink',
     'dark',
   ];
-  static const List<Color> firstColors = [
+  static const List<Color> primaryColor = [
     Colors.green,
     Colors.red,
-    Colors.orange,
+    Colors.deepOrange,
     Colors.pink,
-    Colors.black,
-    Colors.white
-  ];
-  static const List<Color> secondColors = [
-    Colors.black,
-    Colors.black,
-    Colors.black,
-    Colors.black,
+    Colors.yellow,
     Colors.white,
-    Colors.black,
   ];
 }
