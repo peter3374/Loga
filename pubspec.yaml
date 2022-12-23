@@ -26,6 +26,7 @@ dependencies:
   url_launcher:
   localize_and_translate:
   flutter_native_splash:
+  timeago:
 
 
 

@@ -22,17 +22,11 @@ class OptionsButtonWidget extends StatelessWidget {
         spacing: 0,
         alignment: WrapAlignment.center,
         children: [
-          // ConsoleButton(
-          //   leadingIcon: Icons.supervised_user_circle,
-          //   title: 'User',
-          //   onclick: () => null,
-          // ),
           OptionsButton(
-            leadingIcon: Icons.grid_4x4_outlined,
-            title: 'GridView'.tr(),
+            leadingIcon: Icons.supervised_user_circle,
+            title: 'Profile',
             onclick: () => null,
           ),
-
           OptionsButton(
             leadingIcon: Icons.style,
             title: 'Themes'.tr(),
